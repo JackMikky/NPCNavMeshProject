@@ -14,16 +14,29 @@ public abstract class NPCBase : MonoBehaviour
 {
     public NPCType NPCType = NPCType.Citizen;
 
-    protected Transform target;
+    [Header("NavMesh Settings")]
+    protected Transform target { get; private set; }
+
+    public Transform Target => target;
+
     protected NavMeshAgent agent;
+    public NavMeshAgent Agent => agent;
+
     protected NavMeshObstacle obstacle;
+    public NavMeshObstacle Obstacle => obstacle;
+
+    [Space(10)]
     protected Renderer myRenderer;
+
+    protected Animator anim;
+    public Animator Anim => anim;
 
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         obstacle = GetComponent<NavMeshObstacle>();
         myRenderer = GetComponentInChildren<Renderer>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -41,7 +54,7 @@ public abstract class NPCBase : MonoBehaviour
         this.target = target;
     }
 
-    protected void SetNavigationMode(bool useAgent)
+    public void SetNavigationMode(bool useAgent)
     {
         if (useAgent)
         {

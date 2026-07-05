@@ -1,0 +1,38 @@
+using System;
+using UnityEngine;
+
+public class AssassinInteractedState : IState
+{
+    private AssassinNPC npc;
+
+    public AssassinInteractedState(AssassinNPC npc)
+    {
+        this.npc = npc;
+    }
+
+    public void Dispose()
+    {
+        // no-op
+    }
+
+    public void Enter()
+    {
+        // stop everything and show mark
+        npc.StopAllCoroutines();
+        npc.SetAgentVelocity(0f, isStopped: true);
+        npc.ShowMark(true);
+
+        npc.ResetMovementAnimationFlags();
+        if (npc.Anim != null) npc.Anim.SetBool(AssassinNPC.IsIdleingHash, true);
+    }
+
+    public void Exit()
+    {
+        // no-op
+    }
+
+    public void Update()
+    {
+        // idle
+    }
+}

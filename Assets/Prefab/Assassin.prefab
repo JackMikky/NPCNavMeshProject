@@ -193,7 +193,6 @@ MonoBehaviour:
   stayDuration: 2.5
   navLinkAnimTrigger: Jumping
   mark: {fileID: 7592457166897052057}
-  anim: {fileID: 8171314169866628871}
 --- !u!1 &7592457166897052057
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,10 +395,5 @@ MonoBehaviour:
 --- !u!4 &8086827406764854825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4111819248598986, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
-  m_PrefabInstance: {fileID: 8085286258641580515}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &8171314169866628871 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95389170962898660, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
   m_PrefabInstance: {fileID: 8085286258641580515}
   m_PrefabAsset: {fileID: 0}

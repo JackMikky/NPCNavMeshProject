@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class VipNPC : NPCBase
 {
-    [SerializeField] private Animator anim;
-
     private static readonly int IsTalkingHash = Animator.StringToHash("IsTalking");
 
     private static readonly int IsWalkingHash = Animator.StringToHash("IsWalking");
