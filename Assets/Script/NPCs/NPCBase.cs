@@ -6,6 +6,7 @@ public enum NPCType
 {
     Assassin,
     Citizen,
+    Police,
     VIP
 }
 
@@ -13,7 +14,8 @@ public enum NPCType
 [RequireComponent(typeof(NavMeshObstacle))]
 public abstract class NPCBase : MonoBehaviour
 {
-    public NPCType NPCType = NPCType.Citizen;
+    private NPCType npcType = NPCType.Citizen;
+    [HideInInspector] public NPCType NpcType => npcType;
 
     [Header("NavMesh Settings")]
     protected Transform target { get; private set; }

@@ -71,7 +71,7 @@ public class NPCManager : MonoBehaviour
                     if (hitNpc != null)
                     {
                         hitNpc.OnInteracted();
-                        Debug.Log($"[Interaction] Clicked on an NPC; is this person a suspect?: {hitNpc.NPCType.Equals(NPCType.Assassin)}");
+                        Debug.Log($"[Interaction] Clicked on an NPC; is this person a suspect?: {hitNpc.NpcType.Equals(NPCType.Assassin)}");
                         return;
                     }
                 }

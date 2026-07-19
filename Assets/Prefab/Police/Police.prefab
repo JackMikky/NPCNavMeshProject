@@ -174,7 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57d43a410b8c9440be83116fb6d8f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CitizenNPC
-  NPCType: 1
+  NPCType: 2
+  mark: {fileID: 6722481361728828810}
   previousEnumState: 0
   interactionEndTime: 0
   CitizenType: -1
@@ -186,7 +187,6 @@ MonoBehaviour:
   interactedBehavior: {fileID: 0}
   nextIdleActionTime: 0
   activePanicBehavior: {fileID: 0}
-  mark: {fileID: 6722481361728828810}
   currentState: 0
 --- !u!195 &3162225461875005985
 NavMeshAgent:
