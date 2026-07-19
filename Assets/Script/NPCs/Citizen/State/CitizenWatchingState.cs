@@ -9,22 +9,18 @@ public class CitizenWatchingState : IState
 
     public void Enter()
     {
-        npc.SetNavigationMode(useAgent: false);
-        if (npc.Obstacle != null) npc.Obstacle.carving = true;
-
-        npc.LookAtTarget();
-        npc.SetAnimBool(CitizenNPC.IsIdleingHash, true);
-        npc.SetAnimBool(CitizenNPC.IsWalkingHash, false);
+        npc.IdleBehavior?.Enter(npc);
     }
 
     public void Update()
     {
-        // 观看演讲时，偶尔鼓掌或挥手
-        npc.HandleRandomIdles();
+        npc.IdleBehavior?.UpdateBehavior(npc);
     }
 
     public void Exit()
-    { }
+    {
+        npc.IdleBehavior?.Exit(npc);
+    }
 
     public void Dispose()
     { }

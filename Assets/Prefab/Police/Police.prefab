@@ -175,16 +175,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CitizenNPC
   NPCType: 1
-  isWandering: 0
-  lookTarget: {fileID: 0}
-  wanderRadius: 8
+  previousEnumState: 0
+  interactionEndTime: 0
+  CitizenType: -1
   minStayDuration: 3
   maxStayDuration: 7
-  walkSpeed: 1
+  moveBehavior: {fileID: 0}
+  idleBehavior: {fileID: 0}
+  panicBehavior: {fileID: 0}
+  interactedBehavior: {fileID: 0}
+  nextIdleActionTime: 0
+  activePanicBehavior: {fileID: 0}
   mark: {fileID: 6722481361728828810}
-  anim: {fileID: 0}
-  minActionInterval: 5
-  maxActionInterval: 15
+  currentState: 0
 --- !u!195 &3162225461875005985
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -193,7 +196,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7091489066321530029}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -902729914
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8

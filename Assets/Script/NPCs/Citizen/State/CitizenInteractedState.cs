@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class CitizenInteractedState : IState
 {
     private CitizenNPC npc;
@@ -9,25 +11,29 @@ public class CitizenInteractedState : IState
 
     public void Enter()
     {
-        if (npc.Agent != null && npc.Agent.enabled && npc.Agent.isOnNavMesh)
-        {
-            npc.Agent.isStopped = true;
-        }
-        if (npc.Obstacle != null) npc.Obstacle.carving = false;
-
-        npc.SetAnimBool(CitizenNPC.IsWalkingHash, false);
-        npc.SetAnimBool(CitizenNPC.IsIdleingHash, true);
-
-        if (npc.Mark != null) npc.Mark.SetActive(true);
-        npc.TriggerAnim(CitizenNPC.WaveHash);
+        npc.SetNavigationMode(useAgent: false);
+        npc.InteractedBehavior?.Enter(npc);
+        npc.ShowMark(true);
     }
 
     public void Update()
     {
+        npc.InteractedBehavior?.UpdateBehavior(npc);
+
+        if (Time.time >= npc.interactionEndTime)
+        {
+            if (npc.previousState != null)
+            {
+                npc.ChangeToState(npc.previousState, npc.previousEnumState);
+            }
+        }
     }
 
     public void Exit()
-    { }
+    {
+        npc.ShowMark(false);
+        npc.InteractedBehavior?.Exit(npc);
+    }
 
     public void Dispose()
     { }

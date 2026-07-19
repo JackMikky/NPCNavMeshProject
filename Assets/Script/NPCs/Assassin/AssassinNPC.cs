@@ -82,11 +82,6 @@ public class AssassinNPC : NPCBase
         }
     }
 
-    public void ShowMark(bool show)
-    {
-        if (mark != null) mark.SetActive(show);
-    }
-
     /// <summary>
     /// Wrapper to change state and update debug enum field
     /// </summary>

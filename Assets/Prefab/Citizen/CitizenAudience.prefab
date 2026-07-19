@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 3162225461875005985}
   - component: {fileID: -439759263467744534}
   m_Layer: 8
-  m_Name: Citizen
+  m_Name: CitizenAudience
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,17 +175,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CitizenNPC
   NPCType: 1
-  currentState: 0
-  isWandering: 0
-  lookTarget: {fileID: 0}
-  wanderRadius: 8
+  previousEnumState: 0
+  interactionEndTime: 0
+  CitizenType: 0
   minStayDuration: 10
   maxStayDuration: 60
-  walkSpeed: 1.25
+  moveBehavior: {fileID: 0}
+  idleBehavior: {fileID: 11400000, guid: a24a62cb506b793429ed09f14365f594, type: 2}
+  panicBehavior: {fileID: 11400000, guid: 3a4564be3b7cc6148a1dc5a1feca7a7a, type: 2}
+  interactedBehavior: {fileID: 11400000, guid: 7d0425d84a135544baa8e8817742e71b, type: 2}
+  nextIdleActionTime: 0
+  activePanicBehavior: {fileID: 0}
   mark: {fileID: 6722481361728828810}
-  anim: {fileID: 5885996985644425048}
-  minActionInterval: 5
-  maxActionInterval: 15
+  currentState: 0
 --- !u!195 &3162225461875005985
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -595,10 +597,5 @@ PrefabInstance:
 --- !u!4 &5830480652716842236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4849538730314234, guid: 68617247be1cad64d8dfe7e3cbbb3174, type: 3}
-  m_PrefabInstance: {fileID: 5835325783456994566}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &5885996985644425048 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 95841064056441438, guid: 68617247be1cad64d8dfe7e3cbbb3174, type: 3}
   m_PrefabInstance: {fileID: 5835325783456994566}
   m_PrefabAsset: {fileID: 0}

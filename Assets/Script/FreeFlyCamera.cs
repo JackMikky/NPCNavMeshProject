@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Camera))]
 public class FreeFlyCamera : MonoBehaviour
 {
-    private Camera camera;
+    [SerializeField] private Camera mainCamera;
     [SerializeField] private bool useFreeCamera = false;
 
     [Header("Mouse Movement")]
@@ -33,7 +33,7 @@ public class FreeFlyCamera : MonoBehaviour
 
     private void Awake()
     {
-        camera = GetComponent<Camera>();
+        mainCamera = GetComponent<Camera>();
         speedCash = speed;
         boostSpeed = Mathf.Lerp(0.1f, 50, speed * 2.5f);
         OnChangeToFreeCamera += MouseStateChange;
@@ -75,7 +75,7 @@ public class FreeFlyCamera : MonoBehaviour
         y = mouseDelta.x;
         x = mouseDelta.y;
         var rotate = new Vector3(x * X_RotateSensity, -y * Y_RotateSensity, 0);
-        camera.transform.eulerAngles = camera.transform.eulerAngles - rotate;
+        mainCamera.transform.eulerAngles = mainCamera.transform.eulerAngles - rotate;
     }
 
     private void BoostSpeed(bool useFreeCammera)
@@ -128,7 +128,7 @@ public class FreeFlyCamera : MonoBehaviour
         }
 
         Vector3 delta = new Vector3(lft_right, Up_Down, forward_back) * speed * Time.deltaTime;
-        camera.transform.localPosition += camera.transform.TransformDirection(delta);
+        mainCamera.transform.localPosition += mainCamera.transform.TransformDirection(delta);
     }
 
     private void ExitFreeCamera()

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public enum NPCType
 {
@@ -31,6 +32,9 @@ public abstract class NPCBase : MonoBehaviour
     protected Animator anim;
     public Animator Anim => anim;
 
+    [Space(10)]
+    [SerializeField] private GameObject mark;
+
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -42,6 +46,21 @@ public abstract class NPCBase : MonoBehaviour
     private void Start()
     {
         Initialize();
+    }
+
+    public void LookAtPlayer(Transform player)
+    {
+        if (player == null) return;
+
+        Vector3 direction = player.position - transform.position;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+        }
     }
 
     public virtual void Initialize()
@@ -72,5 +91,10 @@ public abstract class NPCBase : MonoBehaviour
 
     public virtual void OnInteracted()
     {
+    }
+
+    public void ShowMark(bool show)
+    {
+        if (mark != null) mark.SetActive(show);
     }
 }

@@ -8,26 +8,27 @@ public class CitizenStayingState : BaseTimedState<CitizenNPC>
 
     public override void Enter()
     {
-        this.duration = Random.Range(npc.MinStayDuration, npc.MaxStayDuration);
+        this.duration = Random.Range(npc.minStayDuration, npc.maxStayDuration);
         base.Enter();
 
-        npc.SetNavigationMode(useAgent: false);
-        if (npc.Obstacle != null) npc.Obstacle.carving = true;
-
-        npc.LookAtTarget();
-        npc.SetAnimBool(CitizenNPC.IsIdleingHash, true);
-        npc.SetAnimBool(CitizenNPC.IsWalkingHash, false);
+        npc.IdleBehavior?.Enter(npc);
     }
 
     public override void Update()
     {
         base.Update();
 
-        npc.HandleRandomIdles();
+        npc.IdleBehavior?.UpdateBehavior(npc);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        npc.IdleBehavior?.Exit(npc);
     }
 
     protected override void OnTimeOut()
     {
-        npc.MoveToRandomTarget();
+        npc.ChangeToState(npc.WalkingState, NPCState.Wandering);
     }
 }
