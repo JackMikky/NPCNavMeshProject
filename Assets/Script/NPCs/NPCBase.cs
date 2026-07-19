@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public enum NPCType
 {
@@ -14,7 +13,7 @@ public enum NPCType
 [RequireComponent(typeof(NavMeshObstacle))]
 public abstract class NPCBase : MonoBehaviour
 {
-    private NPCType npcType = NPCType.Citizen;
+    protected NPCType npcType = NPCType.Citizen;
     [HideInInspector] public NPCType NpcType => npcType;
 
     [Header("NavMesh Settings")]

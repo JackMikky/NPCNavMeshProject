@@ -53,6 +53,7 @@ public class CitizenNPC : NPCBase
     protected override void Awake()
     {
         base.Awake();
+        this.npcType = NPCType.Citizen;
         StateMachine = new StateMachine();
 
         WatchingState = new CitizenWatchingState(this);

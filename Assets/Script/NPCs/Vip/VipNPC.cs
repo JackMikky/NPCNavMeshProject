@@ -9,6 +9,7 @@ public class VipNPC : NPCBase
     protected override void Awake()
     {
         base.Awake();
+        this.npcType = NPCType.VIP;
 
         anim = GetComponentInChildren<Animator>();
     }

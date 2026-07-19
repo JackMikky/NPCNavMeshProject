@@ -47,6 +47,7 @@ public class AssassinNPC : NPCBase
     protected override void Awake()
     {
         base.Awake();
+        this.npcType = NPCType.Assassin;
         NavLinkAnimHash = Animator.StringToHash(navLinkAnimTrigger);
 
         // Initialize the state machine and the various state classes
