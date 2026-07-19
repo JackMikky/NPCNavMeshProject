@@ -32,9 +32,6 @@ public class AssassinNPC : NPCBase
 
     public int NavLinkAnimHash { get; private set; }
 
-    [Header("Visual Feedback")]
-    [SerializeField] private GameObject mark;
-
     #region Animation hash cache
 
     public static readonly int IsWalkingHash = Animator.StringToHash("IsWalking");

@@ -34,6 +34,7 @@ public abstract class NPCBase : MonoBehaviour
     public Animator Anim => anim;
 
     [Space(10)]
+    [Header("Visual Feedback")]
     [SerializeField] private GameObject mark;
 
     protected virtual void Awake()

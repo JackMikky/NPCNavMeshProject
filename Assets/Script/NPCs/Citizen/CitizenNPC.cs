@@ -21,6 +21,7 @@ public class CitizenNPC : NPCBase
 
     #endregion StateMachine
 
+    [Header("Citizen Type")]
     public CitizenType CitizenType = CitizenType.Audience;
 
     [Header("Stay Setting")]
