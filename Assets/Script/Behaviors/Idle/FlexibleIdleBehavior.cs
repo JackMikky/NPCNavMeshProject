@@ -21,7 +21,7 @@ public class FlexibleIdleBehavior : ScriptableIdleBehavior
         if (npc.Anim != null)
         {
             npc.Anim.SetBool(AnimationConstants.IsWalking, false);
-            npc.Anim.SetBool(AnimationConstants.IsIdleing, true);
+            npc.Anim.SetBool(AnimationConstants.IsIdling, true);
         }
 
         if (npc is CitizenNPC citizen)

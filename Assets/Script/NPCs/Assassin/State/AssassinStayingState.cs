@@ -14,7 +14,7 @@ public class AssassinStayingState : BaseTimedState<AssassinNPC>
 
         npc.ResetMovementAnimationFlags();
         if (npc.Anim != null)
-            npc.Anim.SetBool(AnimationConstants.IsIdleing, true);
+            npc.Anim.SetBool(AnimationConstants.IsIdling, true);
     }
 
     public override void Update()

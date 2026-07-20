@@ -112,7 +112,7 @@ public abstract class NPCBase : MonoBehaviour
 
         anim.SetBool(AnimationConstants.IsWalking, false);
         anim.SetBool(AnimationConstants.IsRunning, false);
-        anim.SetBool(AnimationConstants.IsIdleing, false);
+        anim.SetBool(AnimationConstants.IsIdling, false);
     }
 
     /// <summary>

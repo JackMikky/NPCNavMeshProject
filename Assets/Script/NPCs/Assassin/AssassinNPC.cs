@@ -20,25 +20,33 @@ public class AssassinNPC : NPCBase
     #region Behavior Settings
 
     [Header("Behavior Assets")]
-    [SerializeField] private ScriptableIdleBehavior idleBehavior;
-
-    public ScriptableIdleBehavior IdleBehavior => idleBehavior;
-
+    [Header("Movement")]
     [SerializeField] private ScriptableMoveBehavior approachingBehavior;
+
     public ScriptableMoveBehavior ApproachingBehavior => approachingBehavior;
 
     [SerializeField] private ScriptableMoveBehavior rushingBehavior;
     public ScriptableMoveBehavior RushingBehavior => rushingBehavior;
 
+    [Header("Idle")]
+    [SerializeField] private ScriptableIdleBehavior idleBehavior;
+
+    public ScriptableIdleBehavior IdleBehavior => idleBehavior;
+
+    [Header("Interacted")]
     [SerializeField] private ScriptableInteractedBehavior interactedBehavior;
+
     public ScriptableInteractedBehavior InteractedBehavior => interactedBehavior;
 
+    [Header("Attack")]
     [SerializeField]
     private ScriptableAttackBehavior attackBehavior;
 
     public ScriptableAttackBehavior AttackBehavior => attackBehavior;
 
+    [Header("NavLinking")]
     [SerializeField] private ScriptableNavLinkBehavior navLinkingBehavior;
+
     public ScriptableNavLinkBehavior NavLinkingBehavior => navLinkingBehavior;
 
     [HideInInspector] public float nextPathUpdateTime;
@@ -152,7 +160,7 @@ public class AssassinNPC : NPCBase
         else
         {
             ResetMovementAnimationFlags();
-            anim.SetBool(AnimationConstants.IsIdleing, true);
+            anim.SetBool(AnimationConstants.IsIdling, true);
         }
     }
 

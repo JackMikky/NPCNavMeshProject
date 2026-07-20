@@ -12,7 +12,7 @@ public class FlexibleInteractedBehavior : ScriptableInteractedBehavior
         if (npc.Anim != null)
         {
             npc.Anim.SetBool(AnimationConstants.IsWalking, false);
-            npc.Anim.SetBool(AnimationConstants.IsIdleing, true);
+            npc.Anim.SetBool(AnimationConstants.IsIdling, true);
         }
 
         if (availableAnimationTriggers != null && availableAnimationTriggers.Length > 0 && npc.Anim != null)

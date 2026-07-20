@@ -6,7 +6,7 @@ public static class AnimationConstants
 
     public static string IsWalkingString = "IsWalking";
 
-    public static string IsIdleingString = "IsIdleing";
+    public static string IsIdlingString = "IsIdling";
 
     public static string WaveString = "Wave";
 
@@ -29,8 +29,8 @@ public static class AnimationConstants
     /// <summary>Animator parameter "Walking".For all NPCs.</summary>
     public static readonly int IsWalking = Animator.StringToHash(IsWalkingString);
 
-    /// <summary> Animator parameter "Idleing".For all NPCs.</summary>
-    public static readonly int IsIdleing = Animator.StringToHash(IsIdleingString);
+    /// <summary> Animator parameter "Idling".For all NPCs.</summary>
+    public static readonly int IsIdling = Animator.StringToHash(IsIdlingString);
 
     /// <summary>
     /// Animator parameter "Wave".For Citizens.

@@ -30,17 +30,24 @@ public class CitizenNPC : NPCBase
     #region Behavior Settings
 
     [Header("Behavior Assets")]
+    [Header("Movement")]
     [SerializeField] private ScriptableMoveBehavior moveBehavior;
 
     public ScriptableMoveBehavior MoveBehavior => moveBehavior;
 
+    [Header("Idle")]
     [SerializeField] private ScriptableIdleBehavior idleBehavior;
+
     public ScriptableIdleBehavior IdleBehavior => idleBehavior;
 
+    [Header("Panic")]
     [SerializeField] private ScriptablePanicBehavior panicBehavior;
+
     public ScriptablePanicBehavior PanicBehavior => panicBehavior;
 
+    [Header("Interacted")]
     [SerializeField] private ScriptableInteractedBehavior interactedBehavior;
+
     public ScriptableInteractedBehavior InteractedBehavior => interactedBehavior;
 
     [HideInInspector] public float nextIdleActionTime;
