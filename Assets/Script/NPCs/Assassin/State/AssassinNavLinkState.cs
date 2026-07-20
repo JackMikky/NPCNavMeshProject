@@ -2,12 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AssassinNavLinkingState : IState
+public class AssassinNavLinkState : IState
 {
     private AssassinNPC npc;
     private Coroutine traversalCoroutine;
 
-    public AssassinNavLinkingState(AssassinNPC npc)
+    public AssassinNavLinkState(AssassinNPC npc)
     {
         this.npc = npc;
     }

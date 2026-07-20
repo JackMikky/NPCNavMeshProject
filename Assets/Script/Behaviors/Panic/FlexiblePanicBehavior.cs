@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewFlexiblePanic", menuName = BehaviorConstants.PanicBehaviorMenuName + "FlexiblePanic")]
-public class FlexiblePanicBehavior : ScriptableBehaviorBase
+public class FlexiblePanicBehavior : ScriptablePanicBehavior
 {
     [Header("Animation Trigger List")]
     [SerializeField] private string[] availableAnimationTriggers;

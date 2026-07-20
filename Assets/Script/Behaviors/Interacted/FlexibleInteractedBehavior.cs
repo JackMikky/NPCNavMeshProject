@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewFlexibleInteracted", menuName = BehaviorConstants.InteractedBehaviorMenuName + "FlexibleInteracted")]
-public class FlexibleInteractedBehavior : ScriptableBehaviorBase
+public class FlexibleInteractedBehavior : ScriptableInteractedBehavior
 {
     [SerializeField] private string[] availableAnimationTriggers;
     [SerializeField] private float interactionDuration = 3.0f;
@@ -33,5 +33,6 @@ public class FlexibleInteractedBehavior : ScriptableBehaviorBase
         npc.LookAtPlayer(player);
     }
 
-    public override void Exit(NPCBase npc) { }
+    public override void Exit(NPCBase npc)
+    { }
 }

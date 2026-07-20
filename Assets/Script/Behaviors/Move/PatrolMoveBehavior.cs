@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPatrolMove", menuName = BehaviorConstants.MoveBehaviorMenuName + "PatrolMove")]
-public class PatrolMoveBehavior : ScriptableBehaviorBase
+public class PatrolMoveBehavior : ScriptableMoveBehavior
 {
     [SerializeField] private float patrolSpeed = 3.5f;
     [SerializeField] private float stoppingDistance = 1.2f;

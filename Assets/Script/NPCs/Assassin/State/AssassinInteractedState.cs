@@ -20,7 +20,7 @@ public class AssassinInteractedState : IState
         npc.ShowMark(true);
 
         npc.ResetMovementAnimationFlags();
-        if (npc.Anim != null) npc.Anim.SetBool(AssassinNPC.IsIdleing, true);
+        if (npc.Anim != null) npc.Anim.SetBool(AnimationConstants.IsIdleing, true);
     }
 
     public void Exit()

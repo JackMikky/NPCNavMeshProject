@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewFlexibleIdle", menuName = BehaviorConstants.IdleBehaviorMenuName + "FlexibleIdle")]
-public class FlexibleIdleBehavior : ScriptableBehaviorBase
+public class FlexibleIdleBehavior : ScriptableIdleBehavior
 {
     [Header("Animation Trigger List")]
     [SerializeField] private string[] availableAnimationTriggers;

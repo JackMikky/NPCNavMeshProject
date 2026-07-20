@@ -8,7 +8,7 @@ public class AssassinNPC : NPCBase
     public AssassinStayingState StayingState { get; private set; }
     public AssassinApproachingState ApproachingState { get; private set; }
     public AssassinRushingState RushingState { get; private set; }
-    public AssassinNavLinkingState NavLinkingState { get; private set; }
+    public AssassinNavLinkState NavLinkState { get; private set; }
     public AssassinInteractedState InteractedState { get; private set; }
 
     [HideInInspector] public IState previousState;
@@ -18,18 +18,23 @@ public class AssassinNPC : NPCBase
     #endregion StateMachine
 
     [Header("Behavior Assets")]
-    [SerializeField] private ScriptableBehaviorBase moveBehavior;
+    [SerializeField] private ScriptableIdleBehavior idleBehavior;
 
-    public ScriptableBehaviorBase MoveBehavior => moveBehavior;
+    public ScriptableIdleBehavior IdleBehavior => idleBehavior;
 
-    [SerializeField] private ScriptableBehaviorBase idleBehavior;
-    public ScriptableBehaviorBase IdleBehavior => idleBehavior;
+    [SerializeField] private ScriptableMoveBehavior approachingBehavior;
+    public ScriptableMoveBehavior ApproachingBehavior => approachingBehavior;
 
-    [SerializeField] private ScriptableBehaviorBase approachingBehavior;
-    public ScriptableBehaviorBase ApproachingBehavior => approachingBehavior;
+    [SerializeField] private ScriptableInteractedBehavior interactedBehavior;
+    public ScriptableInteractedBehavior InteractedBehavior => interactedBehavior;
 
-    [SerializeField] private ScriptableBehaviorBase interactedBehavior;
-    public ScriptableBehaviorBase InteractedBehavior => interactedBehavior;
+    [SerializeField]
+    private ScriptableAttackBehavior attackBehavior;
+
+    public ScriptableAttackBehavior AttackBehavior => attackBehavior;
+
+    [SerializeField] private ScriptableNavLinkBehavior navLinkingBehavior;
+    public ScriptableNavLinkBehavior NavLinkingBehavior => navLinkingBehavior;
 
     [Header("Speed and Distance Settings")]
     public float walkSpeed = 1.2f;
@@ -43,18 +48,8 @@ public class AssassinNPC : NPCBase
     [Tooltip("How long to idle after the threatening animation finishes")]
     [SerializeField] private float stayDuration = 2.5f;
 
-    [Header("Off-mesh Link (NavLink) Settings")]
-    [Tooltip("Ensure the trigger name in the Animator matches this string")]
-    [SerializeField] private string navLinkAnimTrigger = "Jumping";
-
-    public int NavLinkAnimHash { get; private set; }
-
     #region Animation hash cache
 
-    public static int IsWalking => AnimationConstants.IsWalking;
-
-    public static int IsRunning => AnimationConstants.IsRunning;
-    public static int IsIdleing => AnimationConstants.IsIdleing;
     public static int ThreateningTrigger => AnimationConstants.Threatening;
 
     #endregion Animation hash cache
@@ -67,14 +62,13 @@ public class AssassinNPC : NPCBase
     {
         base.Awake();
         this.npcType = NPCType.Assassin;
-        NavLinkAnimHash = AnimationConstants.JumpingNavLinkAnim;
 
         // Initialize the state machine and the various state classes
         ThreateningState = new ThreateningState(this);
         StayingState = new AssassinStayingState(this, this.stayDuration);
         ApproachingState = new AssassinApproachingState(this);
         RushingState = new AssassinRushingState(this);
-        NavLinkingState = new AssassinNavLinkingState(this);
+        NavLinkState = new AssassinNavLinkState(this);
         InteractedState = new AssassinInteractedState(this);
     }
 
@@ -96,7 +90,7 @@ public class AssassinNPC : NPCBase
         {
             if (agent != null && agent.enabled && agent.isOnNavMesh && agent.isOnOffMeshLink)
             {
-                ChangeToState(NavLinkingState, AssassinState.NavLinking);
+                ChangeToState(NavLinkState, AssassinState.NavLinking);
             }
         }
     }
@@ -126,9 +120,9 @@ public class AssassinNPC : NPCBase
     public void ResetMovementAnimationFlags()
     {
         if (anim == null) return;
-        anim.SetBool(IsWalking, false);
-        anim.SetBool(IsRunning, false);
-        anim.SetBool(IsIdleing, false);
+        anim.SetBool(AnimationConstants.IsWalking, false);
+        anim.SetBool(AnimationConstants.IsRunning, false);
+        anim.SetBool(AnimationConstants.IsIdleing, false);
     }
 
     public void SetAgentVelocity(float speed, bool isStopped)
@@ -161,14 +155,14 @@ public class AssassinNPC : NPCBase
             ResetMovementAnimationFlags();
 
             if (shouldRun)
-                anim.SetBool(IsRunning, true);
+                anim.SetBool(AnimationConstants.IsRunning, true);
             else
-                anim.SetBool(IsWalking, true);
+                anim.SetBool(AnimationConstants.IsWalking, true);
         }
         else
         {
             ResetMovementAnimationFlags();
-            anim.SetBool(IsIdleing, true);
+            anim.SetBool(AnimationConstants.IsIdleing, true);
         }
     }
 

@@ -185,14 +185,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cdcd4f89901d143bd9c313eec3c83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AssassinNPC
-  NPCType: 0
-  currentState: 0
+  mark: {fileID: 7592457166897052057}
+  previousEnumState: 0
+  interactionEndTime: 0
+  idleBehavior: {fileID: 11400000, guid: 73702d93741041e4c8e142afb90efa2e, type: 2}
+  approachingBehavior: {fileID: 11400000, guid: 0a2e8cac4fce48b4ea8b66e4c45f2156, type: 2}
+  interactedBehavior: {fileID: 11400000, guid: 69e5ff2b602ffcf48961856f5cb89bb7, type: 2}
+  attackBehavior: {fileID: 11400000, guid: e529810f6c74dec42be9160cb93c09ae, type: 2}
+  navLinkingBehavior: {fileID: 11400000, guid: 34a3062147ffc2f4eb771746ba11562a, type: 2}
   walkSpeed: 1.5
   runSpeed: 4
   startRunningDistance: 15
   stayDuration: 2.5
-  navLinkAnimTrigger: Jumping
-  mark: {fileID: 7592457166897052057}
+  currentState: 0
 --- !u!1 &7592457166897052057
 GameObject:
   m_ObjectHideFlags: 0

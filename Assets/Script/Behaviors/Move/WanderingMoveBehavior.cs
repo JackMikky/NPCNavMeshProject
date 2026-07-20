@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "NewWanderingMove", menuName = BehaviorConstants.MoveBehaviorMenuName + "WanderingMove")]
-public class WanderingMoveBehavior : ScriptableBehaviorBase
+public class WanderingMoveBehavior : ScriptableMoveBehavior
 {
     [SerializeField] private float wanderRadius = 5f;
 

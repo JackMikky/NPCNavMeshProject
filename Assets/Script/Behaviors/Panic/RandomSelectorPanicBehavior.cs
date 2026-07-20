@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewRandomSelectorPanic", menuName = BehaviorConstants.PanicBehaviorMenuName + "RandomSelectorPanic")]
-public class RandomSelectorPanicBehavior : ScriptableBehaviorBase
+public class RandomSelectorPanicBehavior : ScriptablePanicBehavior
 {
     [SerializeField] private List<ScriptableBehaviorBase> possibleBehaviors;
 

@@ -22,7 +22,7 @@ public class AssassinApproachingState : IState
     {
         npc.SetAgentVelocity(npc.walkSpeed, isStopped: false);
         npc.ResetMovementAnimationFlags();
-        if (npc.Anim != null) npc.Anim.SetBool(AssassinNPC.IsWalking, true);
+        if (npc.Anim != null) npc.Anim.SetBool(AnimationConstants.IsWalking, true);
 
         npc.SetDestinationToTarget();
         pathUpdateTimer = PathUpdateInterval;

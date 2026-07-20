@@ -43,7 +43,7 @@ public static class AnimationConstants
     public static readonly int Exposed = Animator.StringToHash(ExposedString);
 
     /// <summary>
-    /// Animator parameter "IsRunning".For all NPCs.
+    /// Animator parameter "AnimationConstants.IsRunning".For all NPCs.
     /// </summary>
     public static readonly int IsRunning = Animator.StringToHash(IsRunningString);
 

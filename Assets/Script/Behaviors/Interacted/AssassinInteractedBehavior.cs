@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewAssassinInteracted", menuName = BehaviorConstants.InteractedBehaviorMenuName + "AssassinInteracted")]
-public class AssassinInteractedBehavior : ScriptableBehaviorBase
+public class AssassinInteractedBehavior : ScriptableInteractedBehavior
 {
     public override void Enter(NPCBase npc)
     {
