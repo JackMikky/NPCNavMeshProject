@@ -91,10 +91,8 @@ public class AssassinNPC : NPCBase
         ChangeToState(ThreateningState, AssassinState.Threatening);
     }
 
-    private void Update()
+    protected override void OnUpdate()
     {
-        StateMachine.Update();
-
         if (StateMachine.CurrentState == ApproachingState || StateMachine.CurrentState == RushingState)
         {
             if (agent != null && agent.enabled && agent.isOnNavMesh && agent.isOnOffMeshLink)

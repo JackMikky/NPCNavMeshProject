@@ -53,6 +53,17 @@ public abstract class NPCBase : MonoBehaviour
         Initialize();
     }
 
+    private void Update()
+    {
+        StateMachine.Update();
+
+        OnUpdate();
+    }
+
+    protected virtual void OnUpdate()
+    {
+    }
+
     public void LookAtPlayer(Transform player)
     {
         if (player == null) return;

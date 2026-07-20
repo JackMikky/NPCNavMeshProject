@@ -85,11 +85,6 @@ public class CitizenNPC : NPCBase
         }
     }
 
-    private void Update()
-    {
-        StateMachine.Update();
-    }
-
     public void ChangeToState(IState newState, CitizenState enumState)
     {
         StateMachine.ChangeState(newState);
@@ -107,6 +102,6 @@ public class CitizenNPC : NPCBase
         }
 
         ChangeToState(InteractedState, CitizenState.Interacted);
-        Debug.Log($"{this.gameObject.name}:I'm citizen");
+        Debug.Log($"{this.gameObject.name}:I'm Citizen");
     }
 }
