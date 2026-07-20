@@ -50,13 +50,9 @@ public class CitizenNPC : NPCBase
 
     public ScriptableInteractedBehavior InteractedBehavior => interactedBehavior;
 
-    [HideInInspector] public float nextIdleActionTime;
-
     [HideInInspector] public ScriptableBehaviorBase activePanicBehavior;
 
     #endregion Behavior Settings
-
-    [HideInInspector] public int[] cachedIdleAnimationHashes;
 
     [Space(10)]
     [Header("Debug")]

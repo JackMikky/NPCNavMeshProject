@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class PoliceStayingState : BaseTimedState<PoliceNPC>
+﻿public class PoliceStayingState : BaseTimedState<PoliceNPC>
 {
     public PoliceStayingState(PoliceNPC npc, float duration) : base(npc, duration)
     {
@@ -8,7 +6,8 @@ public class PoliceStayingState : BaseTimedState<PoliceNPC>
 
     public override void Enter()
     {
-        this.duration = Random.Range(npc.minStayDuration, npc.maxStayDuration);
+        this.duration = npc.currentWaypointStayDuration;
+
         base.Enter();
 
         npc.IdleBehavior?.Enter(npc);
@@ -17,7 +16,6 @@ public class PoliceStayingState : BaseTimedState<PoliceNPC>
     public override void Update()
     {
         base.Update();
-
         npc.IdleBehavior?.UpdateBehavior(npc);
     }
 

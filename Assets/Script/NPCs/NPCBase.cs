@@ -35,6 +35,10 @@ public abstract class NPCBase : MonoBehaviour
     protected Animator anim;
     public Animator Anim => anim;
 
+    [HideInInspector] public float nextIdleActionTime;
+    [HideInInspector] public int[] cachedIdleAnimationHashes;
+    [HideInInspector] public float currentWaypointStayDuration;
+
     [Space(10)]
     [Header("Visual Feedback")]
     [SerializeField] private GameObject mark;

@@ -20,7 +20,7 @@ public class PolicePatrolingState : IState
         {
             if (npc.Agent.remainingDistance <= npc.Agent.stoppingDistance)
             {
-                npc.ChangeToState(npc.StayingState, PoliceState.Staying);
+                npc.ChangeToState(npc.StayingState, PoliceState.Patrolling);
             }
         }
     }

@@ -20,6 +20,12 @@ public class PoliceNPC : NPCBase
 
     #endregion StateMachine
 
+    [Header("Patrol Settings")]
+    [Tooltip("Sequentially drag the patrol waypoints for the police officer into the scene.")]
+    public Transform[] patrolWaypoints;
+
+    [HideInInspector] public int currentWaypointIndex = 0;
+
     [Header("Stay Setting")]
     public float minStayDuration = 2f;
 
@@ -48,13 +54,9 @@ public class PoliceNPC : NPCBase
 
     public ScriptableInteractedBehavior InteractedBehavior => interactedBehavior;
 
-    [HideInInspector] public float nextIdleActionTime;
-
     [HideInInspector] public ScriptableBehaviorBase activePanicBehavior;
 
     #endregion Behavior Settings
-
-    [HideInInspector] public int[] cachedIdleAnimationHashes;
 
     [Space(10)]
     [Header("Debug")]

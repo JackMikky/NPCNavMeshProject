@@ -15,8 +15,8 @@ NavMeshProjectSettings:
     cost: 6
   - name: Stage
     cost: 3
-  - name: 
-    cost: 1
+  - name: NoPatrolArea
+    cost: 2
   - name: 
     cost: 1
   - name: 

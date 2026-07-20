@@ -24,56 +24,47 @@ public class FlexibleIdleBehavior : ScriptableIdleBehavior
             npc.Anim.SetBool(AnimationConstants.IsIdling, true);
         }
 
-        if (npc is CitizenNPC citizen)
+        if (availableAnimationTriggers != null && availableAnimationTriggers.Length > 0)
         {
-            if (availableAnimationTriggers != null && availableAnimationTriggers.Length > 0)
+            npc.cachedIdleAnimationHashes = new int[availableAnimationTriggers.Length];
+
+            for (int i = 0; i < availableAnimationTriggers.Length; i++)
             {
-                citizen.cachedIdleAnimationHashes = new int[availableAnimationTriggers.Length];
-
-                for (int i = 0; i < availableAnimationTriggers.Length; i++)
-                {
-                    citizen.cachedIdleAnimationHashes[i] = Animator.StringToHash(availableAnimationTriggers[i]);
-                }
+                npc.cachedIdleAnimationHashes[i] = Animator.StringToHash(availableAnimationTriggers[i]);
             }
-
-            UpdateNextActionTime(citizen);
         }
+
+        UpdateNextActionTime(npc);
     }
 
     public override void UpdateBehavior(NPCBase npc)
     {
         if (npc.Anim == null) return;
 
-        if (npc is CitizenNPC citizen)
+        if (npc.cachedIdleAnimationHashes == null || npc.cachedIdleAnimationHashes.Length == 0)
+            return;
+
+        if (Time.time >= npc.nextIdleActionTime)
         {
-            if (citizen.cachedIdleAnimationHashes == null || citizen.cachedIdleAnimationHashes.Length == 0)
-                return;
-
-            if (Time.time >= citizen.nextIdleActionTime)
+            if (Random.value <= actionChance)
             {
-                if (Random.value <= actionChance)
-                {
-                    int randomIndex = Random.Range(0, citizen.cachedIdleAnimationHashes.Length);
-                    int selectedTriggerHash = citizen.cachedIdleAnimationHashes[randomIndex];
+                int randomIndex = Random.Range(0, npc.cachedIdleAnimationHashes.Length);
+                int selectedTriggerHash = npc.cachedIdleAnimationHashes[randomIndex];
 
-                    npc.Anim.SetTrigger(selectedTriggerHash);
-                }
-
-                UpdateNextActionTime(citizen);
+                npc.Anim.SetTrigger(selectedTriggerHash);
             }
+
+            UpdateNextActionTime(npc);
         }
     }
 
     public override void Exit(NPCBase npc)
     {
-        if (npc is CitizenNPC citizen)
-        {
-            citizen.cachedIdleAnimationHashes = null;
-        }
+        npc.cachedIdleAnimationHashes = null;
     }
 
-    private void UpdateNextActionTime(CitizenNPC citizen)
+    private void UpdateNextActionTime(NPCBase npc)
     {
-        citizen.nextIdleActionTime = Time.time + Random.Range(minInterval, maxInterval);
+        npc.nextIdleActionTime = Time.time + Random.Range(minInterval, maxInterval);
     }
 }

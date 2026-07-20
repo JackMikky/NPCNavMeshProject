@@ -186,7 +186,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612164787046202184}
-  - component: {fileID: 677606877415581348}
   - component: {fileID: 2188524703676834151}
   - component: {fileID: 2942448847977350269}
   - component: {fileID: 6159732298854815331}
@@ -215,28 +214,6 @@ Transform:
   - {fileID: 7914391316445855320}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &677606877415581348
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142337114656008213}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 2dc7b382d25903545b405802eb2198ab, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7d6e8e9b05f29c941ab32ebca447f935, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 1
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!136 &2188524703676834151
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -310,19 +287,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581773826ef5dae4c892212c2e1521a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PoliceNPC
+  nextIdleActionTime: 0
+  cachedIdleAnimationHashes: 
+  currentWaypointStayDuration: 0
   mark: {fileID: 1988952771493492394}
   previousEnumState: 0
   interactionEndTime: 0
+  patrolWaypoints: []
+  currentWaypointIndex: 0
   minStayDuration: 2
   maxStayDuration: 5
-  patrolingBehavior: {fileID: 0}
+  patrolingBehavior: {fileID: 11400000, guid: 1662b165b74f4294e9801a606c01515f, type: 2}
   chasingBehavior: {fileID: 0}
-  idleBehavior: {fileID: 0}
+  idleBehavior: {fileID: 11400000, guid: afa056171d207944fa248a4b7685eb9f, type: 2}
   keepingWatchBehavior: {fileID: 0}
   interactedBehavior: {fileID: 0}
-  nextIdleActionTime: 0
   activePanicBehavior: {fileID: 0}
-  cachedIdleAnimationHashes: 
   currentState: 4
 --- !u!1001 &7915933233282384274
 PrefabInstance:
@@ -606,7 +586,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 4024c6bed771b7647914b0812b462a19, type: 2}
     - target: {fileID: 95389170962898660, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
       propertyPath: m_AnimatePhysics
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95389170962898660, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 137166910513705172, guid: f11fc98cf1e8d5547a9b2ec85cc9c664, type: 3}
       propertyPath: m_RenderingLayerMask
