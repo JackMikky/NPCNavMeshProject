@@ -1,4 +1,4 @@
-public enum NPCState
+public enum CitizenState
 {
     Watching,
     Wandering,

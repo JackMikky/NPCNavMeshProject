@@ -1,6 +1,3 @@
-using System;
-using UnityEngine;
-
 public class AssassinInteractedState : IState
 {
     private AssassinNPC npc;
@@ -23,7 +20,7 @@ public class AssassinInteractedState : IState
         npc.ShowMark(true);
 
         npc.ResetMovementAnimationFlags();
-        if (npc.Anim != null) npc.Anim.SetBool(AssassinNPC.IsIdleingHash, true);
+        if (npc.Anim != null) npc.Anim.SetBool(AssassinNPC.IsIdleing, true);
     }
 
     public void Exit()

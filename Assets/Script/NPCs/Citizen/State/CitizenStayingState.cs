@@ -29,6 +29,6 @@ public class CitizenStayingState : BaseTimedState<CitizenNPC>
 
     protected override void OnTimeOut()
     {
-        npc.ChangeToState(npc.WalkingState, NPCState.Wandering);
+        npc.ChangeToState(npc.WalkingState, CitizenState.Wandering);
     }
 }

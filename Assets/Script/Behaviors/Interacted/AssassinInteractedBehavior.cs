@@ -10,7 +10,7 @@ public class AssassinInteractedBehavior : ScriptableBehaviorBase
         var player = Camera.main.transform;
         npc.LookAtPlayer(player);
 
-        if (npc.Anim != null) npc.Anim.SetTrigger("Exposed");
+        if (npc.Anim != null) npc.Anim.SetTrigger(AnimationConstants.Exposed);
 
         Debug.Log("[GameManager] Game Over! You caught the assassin!");
         // GameManager.Instance.TriggerVictory();

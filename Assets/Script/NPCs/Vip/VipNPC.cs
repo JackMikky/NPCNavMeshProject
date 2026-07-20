@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class VipNPC : NPCBase
 {
-    private static readonly int IsTalkingHash = Animator.StringToHash("IsTalking");
+    private static readonly int IsTalkingHash = AnimationConstants.IsTalking;
 
-    private static readonly int IsWalkingHash = Animator.StringToHash("IsWalking");
+    private static readonly int IsWalkingHash = AnimationConstants.IsWalking;
 
     protected override void Awake()
     {

@@ -2,7 +2,7 @@
 
 public class AssassinNPC : NPCBase
 {
-    private StateMachine stateMachine;
+    #region StateMachine
 
     public ThreateningState ThreateningState { get; private set; }
     public AssassinStayingState StayingState { get; private set; }
@@ -11,8 +11,25 @@ public class AssassinNPC : NPCBase
     public AssassinNavLinkingState NavLinkingState { get; private set; }
     public AssassinInteractedState InteractedState { get; private set; }
 
-    [Header("State Machine Debug")]
-    [SerializeField] private AssassinState currentState = AssassinState.Threatening;
+    [HideInInspector] public IState previousState;
+    [HideInInspector] public AssassinState previousEnumState;
+    [HideInInspector] public float interactionEndTime;
+
+    #endregion StateMachine
+
+    [Header("Behavior Assets")]
+    [SerializeField] private ScriptableBehaviorBase moveBehavior;
+
+    public ScriptableBehaviorBase MoveBehavior => moveBehavior;
+
+    [SerializeField] private ScriptableBehaviorBase idleBehavior;
+    public ScriptableBehaviorBase IdleBehavior => idleBehavior;
+
+    [SerializeField] private ScriptableBehaviorBase approachingBehavior;
+    public ScriptableBehaviorBase ApproachingBehavior => approachingBehavior;
+
+    [SerializeField] private ScriptableBehaviorBase interactedBehavior;
+    public ScriptableBehaviorBase InteractedBehavior => interactedBehavior;
 
     [Header("Speed and Distance Settings")]
     public float walkSpeed = 1.2f;
@@ -34,21 +51,25 @@ public class AssassinNPC : NPCBase
 
     #region Animation hash cache
 
-    public static readonly int IsWalkingHash = Animator.StringToHash("IsWalking");
-    public static readonly int IsRunningHash = Animator.StringToHash("IsRunning");
-    public static readonly int IsIdleingHash = Animator.StringToHash("IsIdleing");
-    public static readonly int ThreateningTriggerHash = Animator.StringToHash("Threatening");
+    public static int IsWalking => AnimationConstants.IsWalking;
+
+    public static int IsRunning => AnimationConstants.IsRunning;
+    public static int IsIdleing => AnimationConstants.IsIdleing;
+    public static int ThreateningTrigger => AnimationConstants.Threatening;
 
     #endregion Animation hash cache
+
+    [Space(10)]
+    [Header("Debug")]
+    [SerializeField] private AssassinState currentState = AssassinState.Threatening;
 
     protected override void Awake()
     {
         base.Awake();
         this.npcType = NPCType.Assassin;
-        NavLinkAnimHash = Animator.StringToHash(navLinkAnimTrigger);
+        NavLinkAnimHash = AnimationConstants.JumpingNavLinkAnim;
 
         // Initialize the state machine and the various state classes
-        stateMachine = new StateMachine();
         ThreateningState = new ThreateningState(this);
         StayingState = new AssassinStayingState(this, this.stayDuration);
         ApproachingState = new AssassinApproachingState(this);
@@ -69,9 +90,9 @@ public class AssassinNPC : NPCBase
 
     private void Update()
     {
-        stateMachine.Update();
+        StateMachine.Update();
 
-        if (stateMachine.CurrentState == ApproachingState || stateMachine.CurrentState == RushingState)
+        if (StateMachine.CurrentState == ApproachingState || StateMachine.CurrentState == RushingState)
         {
             if (agent != null && agent.enabled && agent.isOnNavMesh && agent.isOnOffMeshLink)
             {
@@ -85,7 +106,7 @@ public class AssassinNPC : NPCBase
     /// </summary>
     public void ChangeToState(IState newState, AssassinState enumState)
     {
-        stateMachine.ChangeState(newState);
+        StateMachine.ChangeState(newState);
         currentState = enumState;
     }
 
@@ -105,9 +126,9 @@ public class AssassinNPC : NPCBase
     public void ResetMovementAnimationFlags()
     {
         if (anim == null) return;
-        anim.SetBool(IsWalkingHash, false);
-        anim.SetBool(IsRunningHash, false);
-        anim.SetBool(IsIdleingHash, false);
+        anim.SetBool(IsWalking, false);
+        anim.SetBool(IsRunning, false);
+        anim.SetBool(IsIdleing, false);
     }
 
     public void SetAgentVelocity(float speed, bool isStopped)
@@ -136,18 +157,18 @@ public class AssassinNPC : NPCBase
 
         if (currentSpeed > 0.15f)
         {
-            bool shouldRun = (stateMachine.CurrentState == RushingState) && currentSpeed > (walkSpeed * 1.1f);
+            bool shouldRun = (StateMachine.CurrentState == RushingState) && currentSpeed > (walkSpeed * 1.1f);
             ResetMovementAnimationFlags();
 
             if (shouldRun)
-                anim.SetBool(IsRunningHash, true);
+                anim.SetBool(IsRunning, true);
             else
-                anim.SetBool(IsWalkingHash, true);
+                anim.SetBool(IsWalking, true);
         }
         else
         {
             ResetMovementAnimationFlags();
-            anim.SetBool(IsIdleingHash, true);
+            anim.SetBool(IsIdleing, true);
         }
     }
 
@@ -161,7 +182,7 @@ public class AssassinNPC : NPCBase
 
     public void StartMovingAfterThreaten()
     {
-        if (stateMachine.CurrentState == ThreateningState)
+        if (StateMachine.CurrentState == ThreateningState)
         {
             ChangeToState(StayingState, AssassinState.Staying);
         }

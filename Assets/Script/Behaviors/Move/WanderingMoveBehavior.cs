@@ -12,7 +12,11 @@ public class WanderingMoveBehavior : ScriptableBehaviorBase
         if (npc.Anim == null) return;
         npc.SetNavigationMode(true);
 
-        npc.Anim.SetBool(this.defaultAnimationTrigger, true);
+        // defaultAnimationTrigger may be a hash name or string; prefer using centralized constants if available
+        if (this.defaultAnimationTrigger == AnimationConstants.IsWalkingString)
+            npc.Anim.SetBool(AnimationConstants.IsWalking, true);
+        else
+            npc.Anim.SetBool(this.defaultAnimationTrigger, true);
 
         Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
         randomDirection += npc.transform.position;

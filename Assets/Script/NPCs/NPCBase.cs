@@ -16,6 +16,8 @@ public abstract class NPCBase : MonoBehaviour
     protected NPCType npcType = NPCType.Citizen;
     [HideInInspector] public NPCType NpcType => npcType;
 
+    protected StateMachine StateMachine { get; private set; }
+
     [Header("NavMesh Settings")]
     protected Transform target { get; private set; }
 
@@ -43,6 +45,7 @@ public abstract class NPCBase : MonoBehaviour
         obstacle = GetComponent<NavMeshObstacle>();
         myRenderer = GetComponentInChildren<Renderer>();
         anim = GetComponentInChildren<Animator>();
+        StateMachine = new StateMachine();
     }
 
     private void Start()

@@ -20,7 +20,7 @@ public class AssassinNavLinkingState : IState
     public void Enter()
     {
         npc.ResetMovementAnimationFlags();
-        if (npc.Anim != null) npc.Anim.SetTrigger(npc.NavLinkAnimHash);
+        if (npc.Anim != null) npc.Anim.SetTrigger(AnimationConstants.JumpingNavLinkAnim);
 
         traversalCoroutine = npc.StartCoroutine(TraverseNavLinkCoroutine());
     }

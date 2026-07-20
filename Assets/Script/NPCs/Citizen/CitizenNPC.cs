@@ -4,8 +4,6 @@ public class CitizenNPC : NPCBase
 {
     #region StateMachine
 
-    public StateMachine StateMachine { get; private set; }
-
     public CitizenWatchingState WatchingState { get; private set; }
     public CitizenWalkingState WalkingState { get; private set; }
     public CitizenStayingState StayingState { get; private set; }
@@ -16,7 +14,7 @@ public class CitizenNPC : NPCBase
     { get; private set; }
 
     [HideInInspector] public IState previousState;
-    [HideInInspector] public NPCState previousEnumState;
+    [HideInInspector] public CitizenState previousEnumState;
     [HideInInspector] public float interactionEndTime;
 
     #endregion StateMachine
@@ -28,6 +26,8 @@ public class CitizenNPC : NPCBase
     public float minStayDuration = 2f;
 
     public float maxStayDuration = 5f;
+
+    #region Behavior Settings
 
     [Header("Behavior Assets")]
     [SerializeField] private ScriptableBehaviorBase moveBehavior;
@@ -46,16 +46,18 @@ public class CitizenNPC : NPCBase
     [HideInInspector] public float nextIdleActionTime;
 
     [HideInInspector] public ScriptableBehaviorBase activePanicBehavior;
+    [HideInInspector] public int[] cachedIdleAnimationHashes;
+
+    #endregion Behavior Settings
 
     [Space(10)]
     [Header("Debug")]
-    [SerializeField] private NPCState currentState = NPCState.Watching;
+    [SerializeField] private CitizenState currentState = CitizenState.Staying;
 
     protected override void Awake()
     {
         base.Awake();
         this.npcType = NPCType.Citizen;
-        StateMachine = new StateMachine();
 
         WatchingState = new CitizenWatchingState(this);
         WalkingState = new CitizenWalkingState(this);
@@ -69,11 +71,11 @@ public class CitizenNPC : NPCBase
         switch (this.CitizenType)
         {
             case CitizenType.Audience:
-                ChangeToState(WatchingState, NPCState.Watching);
+                ChangeToState(WatchingState, CitizenState.Watching);
                 break;
 
             case CitizenType.Passerby:
-                ChangeToState(WalkingState, NPCState.Wandering);
+                ChangeToState(WalkingState, CitizenState.Wandering);
                 break;
 
             case CitizenType.None:
@@ -87,7 +89,7 @@ public class CitizenNPC : NPCBase
         StateMachine.Update();
     }
 
-    public void ChangeToState(IState newState, NPCState enumState)
+    public void ChangeToState(IState newState, CitizenState enumState)
     {
         StateMachine.ChangeState(newState);
         currentState = enumState;
@@ -103,7 +105,7 @@ public class CitizenNPC : NPCBase
             previousEnumState = currentState;
         }
 
-        ChangeToState(InteractedState, NPCState.Interacted);
+        ChangeToState(InteractedState, CitizenState.Interacted);
         Debug.Log($"{this.gameObject.name}:I'm citizen");
     }
 }

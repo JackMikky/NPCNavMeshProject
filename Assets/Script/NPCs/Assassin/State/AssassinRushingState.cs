@@ -21,7 +21,7 @@ public class AssassinRushingState : IState
     {
         npc.SetAgentVelocity(npc.runSpeed, isStopped: false);
         npc.ResetMovementAnimationFlags();
-        if (npc.Anim != null) npc.Anim.SetBool(AssassinNPC.IsRunningHash, true);
+        if (npc.Anim != null) npc.Anim.SetBool(AssassinNPC.IsRunning, true);
 
         npc.SetDestinationToTarget();
         pathUpdateTimer = PathUpdateInterval;

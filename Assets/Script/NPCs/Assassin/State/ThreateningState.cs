@@ -17,10 +17,11 @@ public class ThreateningState : IState
 
     public void Enter()
     {
+        // stop movement and play threaten animation, then wait for it to finish
         npc.SetAgentVelocity(0f, isStopped: true);
         if (npc.Anim != null)
         {
-            npc.Anim.SetTrigger(AssassinNPC.ThreateningTriggerHash);
+            npc.Anim.SetTrigger(AnimationConstants.Threatening);
             waitCoroutine = npc.StartCoroutine(WaitForThreatenAnimation());
         }
         else
@@ -46,10 +47,10 @@ public class ThreateningState : IState
     {
         yield return new WaitForSeconds(0.1f);
 
-        if (npc.Anim != null)
-        {
-            AnimatorStateInfo stateInfo = npc.Anim.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsTag("Threatening") || stateInfo.shortNameHash == AssassinNPC.ThreateningTriggerHash)
+            if (npc.Anim != null)
+            {
+                AnimatorStateInfo stateInfo = npc.Anim.GetCurrentAnimatorStateInfo(0);
+                if (stateInfo.IsTag("Threatening") || stateInfo.shortNameHash == AssassinNPC.ThreateningTrigger)
             {
                 float remainingTime = stateInfo.length * (1f - Mathf.Clamp01(stateInfo.normalizedTime));
                 yield return new WaitForSeconds(remainingTime + 0.2f);

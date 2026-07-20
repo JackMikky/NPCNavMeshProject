@@ -20,7 +20,7 @@ public class CitizenWalkingState : IState
         {
             if (npc.Agent.remainingDistance <= npc.Agent.stoppingDistance)
             {
-                npc.ChangeToState(npc.StayingState, NPCState.Staying);
+                npc.ChangeToState(npc.StayingState, CitizenState.Staying);
             }
         }
     }
