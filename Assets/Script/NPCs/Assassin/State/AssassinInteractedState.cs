@@ -21,6 +21,7 @@ public class AssassinInteractedState : IState
 
         npc.ResetMovementAnimationFlags();
         if (npc.Anim != null) npc.Anim.SetBool(AnimationConstants.IsIdleing, true);
+        npc.InteractedBehavior?.Enter(npc);
     }
 
     public void Exit()

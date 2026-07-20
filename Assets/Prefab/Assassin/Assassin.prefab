@@ -190,9 +190,11 @@ MonoBehaviour:
   interactionEndTime: 0
   idleBehavior: {fileID: 11400000, guid: 73702d93741041e4c8e142afb90efa2e, type: 2}
   approachingBehavior: {fileID: 11400000, guid: 0a2e8cac4fce48b4ea8b66e4c45f2156, type: 2}
+  rushingBehavior: {fileID: 11400000, guid: 0b15b611ec6c73a428836c78a90ee971, type: 2}
   interactedBehavior: {fileID: 11400000, guid: 69e5ff2b602ffcf48961856f5cb89bb7, type: 2}
   attackBehavior: {fileID: 11400000, guid: e529810f6c74dec42be9160cb93c09ae, type: 2}
   navLinkingBehavior: {fileID: 11400000, guid: 34a3062147ffc2f4eb771746ba11562a, type: 2}
+  nextPathUpdateTime: 0
   walkSpeed: 1.5
   runSpeed: 4
   startRunningDistance: 15

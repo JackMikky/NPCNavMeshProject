@@ -11,10 +11,6 @@ public class ThreateningState : IState
         this.npc = npc;
     }
 
-    public void Dispose()
-    {
-    }
-
     public void Enter()
     {
         // stop movement and play threaten animation, then wait for it to finish
@@ -43,14 +39,18 @@ public class ThreateningState : IState
     {
     }
 
+    public void Dispose()
+    {
+    }
+
     private IEnumerator WaitForThreatenAnimation()
     {
         yield return new WaitForSeconds(0.1f);
 
-            if (npc.Anim != null)
-            {
-                AnimatorStateInfo stateInfo = npc.Anim.GetCurrentAnimatorStateInfo(0);
-                if (stateInfo.IsTag("Threatening") || stateInfo.shortNameHash == AssassinNPC.ThreateningTrigger)
+        if (npc.Anim != null)
+        {
+            AnimatorStateInfo stateInfo = npc.Anim.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsTag("Threatening") || stateInfo.shortNameHash == AssassinNPC.ThreateningTrigger)
             {
                 float remainingTime = stateInfo.length * (1f - Mathf.Clamp01(stateInfo.normalizedTime));
                 yield return new WaitForSeconds(remainingTime + 0.2f);

@@ -26,11 +26,12 @@ public class AssassinApproachingState : IState
 
         npc.SetDestinationToTarget();
         pathUpdateTimer = PathUpdateInterval;
+        npc.ApproachingBehavior?.Enter(npc);
     }
 
     public void Exit()
     {
-        // no-op
+        npc.ApproachingBehavior?.Exit(npc);
     }
 
     public void Update()
@@ -52,5 +53,7 @@ public class AssassinApproachingState : IState
         }
 
         npc.SyncMovementAnimation();
+
+        npc.ApproachingBehavior?.UpdateBehavior(npc);
     }
 }

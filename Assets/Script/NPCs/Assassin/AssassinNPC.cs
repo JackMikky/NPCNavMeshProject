@@ -17,6 +17,8 @@ public class AssassinNPC : NPCBase
 
     #endregion StateMachine
 
+    #region Behavior Settings
+
     [Header("Behavior Assets")]
     [SerializeField] private ScriptableIdleBehavior idleBehavior;
 
@@ -24,6 +26,9 @@ public class AssassinNPC : NPCBase
 
     [SerializeField] private ScriptableMoveBehavior approachingBehavior;
     public ScriptableMoveBehavior ApproachingBehavior => approachingBehavior;
+
+    [SerializeField] private ScriptableMoveBehavior rushingBehavior;
+    public ScriptableMoveBehavior RushingBehavior => rushingBehavior;
 
     [SerializeField] private ScriptableInteractedBehavior interactedBehavior;
     public ScriptableInteractedBehavior InteractedBehavior => interactedBehavior;
@@ -35,6 +40,10 @@ public class AssassinNPC : NPCBase
 
     [SerializeField] private ScriptableNavLinkBehavior navLinkingBehavior;
     public ScriptableNavLinkBehavior NavLinkingBehavior => navLinkingBehavior;
+
+    [HideInInspector] public float nextPathUpdateTime;
+
+    #endregion Behavior Settings
 
     [Header("Speed and Distance Settings")]
     public float walkSpeed = 1.2f;
@@ -115,23 +124,6 @@ public class AssassinNPC : NPCBase
             ChangeToState(RushingState, AssassinState.Rushing);
         else
             ChangeToState(ApproachingState, AssassinState.Approaching);
-    }
-
-    public void ResetMovementAnimationFlags()
-    {
-        if (anim == null) return;
-        anim.SetBool(AnimationConstants.IsWalking, false);
-        anim.SetBool(AnimationConstants.IsRunning, false);
-        anim.SetBool(AnimationConstants.IsIdleing, false);
-    }
-
-    public void SetAgentVelocity(float speed, bool isStopped)
-    {
-        if (agent != null && agent.enabled && agent.isOnNavMesh)
-        {
-            agent.speed = speed;
-            agent.isStopped = isStopped;
-        }
     }
 
     public void SetDestinationToTarget()

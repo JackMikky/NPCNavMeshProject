@@ -63,7 +63,6 @@ public abstract class NPCBase : MonoBehaviour
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
     }
@@ -91,6 +90,34 @@ public abstract class NPCBase : MonoBehaviour
             if (obstacle != null) obstacle.enabled = true;
         }
     }
+
+    /// <summary>
+    /// Safely reset all base locomotion animation state flags.
+    /// Prevent blending errors where walking or idle animations play while running
+    /// </summary>
+    public void ResetMovementAnimationFlags()
+    {
+        if (anim == null) return;
+
+        anim.SetBool(AnimationConstants.IsWalking, false);
+        anim.SetBool(AnimationConstants.IsRunning, false);
+        anim.SetBool(AnimationConstants.IsIdleing, false);
+    }
+
+    /// <summary>
+    /// Safely modify the movement speed and halt state of pathfinding entities
+    /// Includes built-in safety checks for component activation status and mesh baking bounds
+    /// </summary>
+    public void SetAgentVelocity(float speed, bool isStopped)
+    {
+        if (agent != null && agent.enabled && agent.isOnNavMesh)
+        {
+            agent.speed = speed;
+            agent.isStopped = isStopped;
+        }
+    }
+
+    // ==========================================
 
     protected abstract void OnSetupBehavior();
 
