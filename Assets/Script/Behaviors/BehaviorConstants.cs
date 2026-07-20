@@ -1,11 +1,5 @@
 public static class BehaviorConstants
 {
-    public enum IdleBehaviorList
-    {
-        Wave,
-        Applause
-    }
-
     public const string MoveBehaviorMenuName = "NPC/Behaviors/Move/";
 
     public const string IdleBehaviorMenuName = "NPC/Behaviors/Idle/";
