@@ -15,3 +15,13 @@ public enum AssassinState
     NavLinking,
     Interacted
 }
+
+public enum PoliceState
+{
+    Patrolling,
+    RandomPatrolling,
+    KeepWatching,
+    Chasing,
+    Staying,
+    Interacted
+}

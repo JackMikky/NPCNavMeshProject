@@ -16,8 +16,8 @@ public class PatrolMoveBehavior : ScriptableMoveBehavior
 
         if (npc.Anim != null)
         {
-            npc.Anim.SetBool("IsWalking", true);
-            npc.Anim.SetBool("IsIdleing", false);
+            npc.Anim.SetBool(AnimationConstants.IsWalking, true);
+            npc.Anim.SetBool(AnimationConstants.IsIdling, false);
         }
     }
 
