@@ -86,6 +86,7 @@ public class CitizenNPC : NPCBase
             default:
                 break;
         }
+        NPCManager.Instance.RegisterCitizen(this);
     }
 
     public void ChangeToState(IState newState, CitizenState enumState)

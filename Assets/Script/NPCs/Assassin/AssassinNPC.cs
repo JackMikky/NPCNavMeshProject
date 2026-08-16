@@ -11,6 +11,8 @@ public class AssassinNPC : NPCBase
     public AssassinNavLinkState NavLinkState { get; private set; }
     public AssassinInteractedState InteractedState { get; private set; }
 
+    public AssassinAttackState AttackState { get; private set; }
+
     [HideInInspector] public IState previousState;
     [HideInInspector] public AssassinState previousEnumState;
     [HideInInspector] public float interactionEndTime;
@@ -87,12 +89,14 @@ public class AssassinNPC : NPCBase
         RushingState = new AssassinRushingState(this);
         NavLinkState = new AssassinNavLinkState(this);
         InteractedState = new AssassinInteractedState(this);
+        AttackState = new AssassinAttackState(this);
     }
 
     protected override void OnSetupBehavior()
     {
         SetNavigationMode(useAgent: true);
         LookAtTargetNPC();
+        NPCManager.Instance.RegisterAssassin(this);
 
         if (agent != null) agent.autoTraverseOffMeshLink = false;
 

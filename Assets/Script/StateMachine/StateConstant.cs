@@ -13,7 +13,8 @@ public enum AssassinState
     Approaching,
     Rushing,
     NavLinking,
-    Interacted
+    Interacted,
+    Attacking
 }
 
 public enum PoliceState

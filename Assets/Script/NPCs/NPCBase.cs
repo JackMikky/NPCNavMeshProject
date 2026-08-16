@@ -43,6 +43,12 @@ public abstract class NPCBase : MonoBehaviour
     [Header("Visual Feedback")]
     [SerializeField] private GameObject mark;
 
+    [Space(10)]
+    [Header("Equipment")]
+    [SerializeField] protected WeaponObject currentEquipment;
+
+    public WeaponObject CurrentEquipment => currentEquipment;
+
     protected virtual void Awake()
     {
         agent = GetComponent<NavMeshAgent>();

@@ -1243,6 +1243,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 1d53359c70324d14c989d7058b50ec6b, type: 3}
   m_PrefabInstance: {fileID: 109091505}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &156772572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156772574}
+  - component: {fileID: 156772573}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!114 &156772573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156772572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a617885deb343c4cbade93e3528697c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gameStartUI: {fileID: 0}
+  gameEndUI: {fileID: 0}
+--- !u!4 &156772574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156772572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &168272044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1313,6 +1359,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d2100f10c342364479e7a527f9ef5429, type: 3}
   m_PrefabInstance: {fileID: 168272044}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &169129179
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2270272591464102361, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8332434568223235125, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
+      propertyPath: m_Name
+      value: TestPistol
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c8d67e080e9d3749a0664e38a8f07ea, type: 3}
 --- !u!1001 &177877936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19109,11 +19212,11 @@ GameObject:
   - component: {fileID: 1668544138}
   - component: {fileID: 1668544139}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: NPCManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1668544138
 Transform:
@@ -19153,6 +19256,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   maxSampleDistance: 1.5
+  citizenNPCs: []
+  assassinNPCs: []
+  policeNPCs: []
+  vipNPCs: []
 --- !u!1001 &1668748698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22947,6 +23054,7 @@ SceneRoots:
   - {fileID: 493859459}
   - {fileID: 473513711}
   - {fileID: 1668544138}
+  - {fileID: 156772574}
   - {fileID: 7092472460041075738}
   - {fileID: 1541632830}
   - {fileID: 1706968557}
@@ -22958,3 +23066,4 @@ SceneRoots:
   - {fileID: 985696271}
   - {fileID: 1413846071}
   - {fileID: 547690473}
+  - {fileID: 169129179}

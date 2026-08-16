@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +11,8 @@ using UnityEngine.InputSystem;
 
 public class NPCManager : MonoBehaviour
 {
+    public static NPCManager Instance { get; private set; }
+
     [Header("Prefabs Settings")]
     [Tooltip("A civilian prefab with the CitizenNPC script attached.")]
     public GameObject citizenPrefab;
@@ -29,6 +33,26 @@ public class NPCManager : MonoBehaviour
 
     private NPCBase cachedSuspect;
 
+    [Header("NPC Lists")]
+    [SerializeField] private List<NPCBase> citizenNPCs = new List<NPCBase>();
+
+    [SerializeField] private List<NPCBase> assassinNPCs = new List<NPCBase>();
+    [SerializeField] private List<NPCBase> policeNPCs = new List<NPCBase>();
+    [SerializeField] private List<NPCBase> vipNPCs = new List<NPCBase>();
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         if (vipTransform == null || citizenPrefab == null || assassinPrefab == null) return;
@@ -36,6 +60,11 @@ public class NPCManager : MonoBehaviour
     }
 
     private void Update()
+    {
+        SpawnSuspectByClick();
+    }
+
+    private void SpawnSuspectByClick()
     {
         if (!Application.isPlaying) return;
 
@@ -155,6 +184,38 @@ public class NPCManager : MonoBehaviour
         else
         {
             Debug.LogWarning("The suspect has not yet been generated in the scene, or the game is not running!");
+        }
+    }
+
+    public void RegisterCitizen(NPCBase npc)
+    {
+        if (npc != null && !citizenNPCs.Contains(npc))
+        {
+            citizenNPCs.Add(npc);
+        }
+    }
+
+    public void RegisterAssassin(NPCBase npc)
+    {
+        if (npc != null && !assassinNPCs.Contains(npc))
+        {
+            assassinNPCs.Add(npc);
+        }
+    }
+
+    public void RegisterPolice(NPCBase npc)
+    {
+        if (npc != null && !policeNPCs.Contains(npc))
+        {
+            policeNPCs.Add(npc);
+        }
+    }
+
+    public void RegisterVIP(NPCBase npc)
+    {
+        if (npc != null && !vipNPCs.Contains(npc))
+        {
+            vipNPCs.Add(npc);
         }
     }
 }

@@ -17,6 +17,7 @@ public class VipNPC : NPCBase
     protected override void OnSetupBehavior()
     {
         SetNavigationMode(useAgent: false);
+        NPCManager.Instance.RegisterVIP(this);
 
         if (anim != null)
         {

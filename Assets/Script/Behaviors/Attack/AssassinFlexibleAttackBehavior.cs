@@ -22,14 +22,16 @@ public class AssassinFlexibleAttackBehavior : ScriptableAttackBehavior
             npc.Anim.SetTrigger(Animator.StringToHash(attackTriggerName));
         }
 
+        if (npc is AssassinNPC assassin && assassin.CurrentEquipment != null)
+        {
+            assassin.CurrentEquipment.UseWeapon(assassin.transform, assassin.Target);
+        }
+
         Debug.Log("[Behavior] The assassin successfully launches an attack!");
-        // GameManager.Instance.TriggerGameOver();
     }
 
     public override void UpdateBehavior(NPCBase npc)
-    {
-        // If there is a need for continuous, subtle adjustments to the orientation, you can use LookAt Target here on a per-frame basis.
-    }
+    { }
 
     public override void Exit(NPCBase npc)
     { }
