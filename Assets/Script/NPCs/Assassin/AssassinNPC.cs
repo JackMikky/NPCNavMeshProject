@@ -190,5 +190,6 @@ public class AssassinNPC : NPCBase
     {
         base.OnInteracted();
         ChangeToState(InteractedState, AssassinState.Interacted);
+        NPCManager.Instance.UnregisterAssassin(this);
     }
 }

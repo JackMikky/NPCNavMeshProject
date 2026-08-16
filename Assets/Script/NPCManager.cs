@@ -68,6 +68,8 @@ public class NPCManager : MonoBehaviour
     {
         if (!Application.isPlaying) return;
 
+        if (GameManager.Instance == null || !GameManager.Instance.IsGameRunning) return;
+
         bool click = false;
         Vector2 screenPos = default;
 
@@ -200,6 +202,17 @@ public class NPCManager : MonoBehaviour
         if (npc != null && !assassinNPCs.Contains(npc))
         {
             assassinNPCs.Add(npc);
+        }
+    }
+
+    public void UnregisterAssassin(NPCBase npc)
+    {
+        if (npc != null && assassinNPCs.Contains(npc))
+        {
+            assassinNPCs.Remove(npc);
+
+            //Test code
+            GameManager.Instance.EndGame();
         }
     }
 

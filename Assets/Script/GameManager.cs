@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject gameEndUI;
 
+    public bool IsGameRunning { get; private set; } = false;
+
     public static GameManager Instance { get; private set; }
 
     private void Awake()
@@ -22,6 +24,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Time.timeScale = 0f; // Pause the game at the start
+        if (gameStartUI != null)
+        {
+            gameStartUI.SetActive(true);
+        }
+        if (gameEndUI != null)
+        {
+            gameEndUI.SetActive(false);
+        }
+    }
+
     public void StartGame()
     {
         if (gameStartUI != null)
@@ -29,6 +44,7 @@ public class GameManager : MonoBehaviour
             gameStartUI.SetActive(false);
         }
         Time.timeScale = 1f;
+        IsGameRunning = true;
     }
 
     public void EndGame()
@@ -38,5 +54,15 @@ public class GameManager : MonoBehaviour
             gameEndUI.SetActive(true);
         }
         Time.timeScale = 0f;
+        IsGameRunning = false;
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
