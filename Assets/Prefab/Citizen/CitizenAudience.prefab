@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 7921592714552209496}
   - component: {fileID: 3162225461875005985}
   - component: {fileID: -439759263467744534}
+  - component: {fileID: 1350475857278812854}
   m_Layer: 8
   m_Name: CitizenAudience
   m_TagString: Untagged
@@ -174,7 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57d43a410b8c9440be83116fb6d8f13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CitizenNPC
-  NPCType: 1
+  nextIdleActionTime: 0
+  cachedIdleAnimationHashes: 
+  currentWaypointStayDuration: 0
+  mark: {fileID: 6722481361728828810}
   previousEnumState: 0
   interactionEndTime: 0
   CitizenType: 0
@@ -184,9 +188,7 @@ MonoBehaviour:
   idleBehavior: {fileID: 11400000, guid: a24a62cb506b793429ed09f14365f594, type: 2}
   panicBehavior: {fileID: 11400000, guid: 3a4564be3b7cc6148a1dc5a1feca7a7a, type: 2}
   interactedBehavior: {fileID: 11400000, guid: 7d0425d84a135544baa8e8817742e71b, type: 2}
-  nextIdleActionTime: 0
   activePanicBehavior: {fileID: 0}
-  mark: {fileID: 6722481361728828810}
   currentState: 0
 --- !u!195 &3162225461875005985
 NavMeshAgent:
@@ -226,6 +228,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 1, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1350475857278812854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091489066321530029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5d4d1b56a3d694f837709384ee2857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineObject
+  outlineObjects: []
 --- !u!1 &8247030039052823687
 GameObject:
   m_ObjectHideFlags: 0
