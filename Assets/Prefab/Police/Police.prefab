@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 2942448847977350269}
   - component: {fileID: 6159732298854815331}
   - component: {fileID: -2010958411998906610}
+  - component: {fileID: 9112960285418836994}
   m_Layer: 8
   m_Name: Police
   m_TagString: Untagged
@@ -304,6 +305,19 @@ MonoBehaviour:
   interactedBehavior: {fileID: 0}
   activePanicBehavior: {fileID: 0}
   currentState: 4
+--- !u!114 &9112960285418836994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142337114656008213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5d4d1b56a3d694f837709384ee2857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineObject
+  outlineObjects: []
 --- !u!1001 &7915933233282384274
 PrefabInstance:
   m_ObjectHideFlags: 0

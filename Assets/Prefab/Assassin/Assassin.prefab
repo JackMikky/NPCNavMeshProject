@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3162225461875005985}
   - component: {fileID: -439759263467744534}
   - component: {fileID: -1828134866189945592}
+  - component: {fileID: 7840534858337825596}
   m_Layer: 0
   m_Name: Assassin
   m_TagString: Untagged
@@ -205,6 +206,19 @@ MonoBehaviour:
   startRunningDistance: 15
   stayDuration: 2.5
   currentState: 0
+--- !u!114 &7840534858337825596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091489066321530029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b5d4d1b56a3d694f837709384ee2857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineObject
+  outlineObjects: []
 --- !u!1 &7592457166897052057
 GameObject:
   m_ObjectHideFlags: 0
