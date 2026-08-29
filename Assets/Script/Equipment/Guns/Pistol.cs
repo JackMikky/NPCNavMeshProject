@@ -1,19 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPistol", menuName = EquipmentConstants.PistolMenuName)]
-public class Pistol : ScriptableEquipmentBase
+[CreateAssetMenu(fileName = "NewPistol", menuName = EquipmentConstants.GunMenuName + "Pistol")]
+public class Pistol : GunEquipmentBase
 {
     private void OnValidate()
     {
         Category = EquipmentCategory.Gun;
     }
 
-    public override void UseEquipment(Transform user, Transform target, WeaponObject weaponContext)
+    protected override void OnFired(Transform user, Transform target, WeaponObject weaponContext)
     {
-        if (weaponContext == null) return;
-
-        PlayAttackSound(weaponContext.AudioSource);
-
-        Debug.Log($"[Pistol]{user.name} fires at {target.name} using {Name} (mounted on {weaponContext.name}), dealing {damage} damage!");
+        Debug.Log($"[Pistol]{user.name} fires at {target.name} using {Name}!");
     }
 }

@@ -61,6 +61,7 @@ public class NPCManager : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsGameRunning) return;
         SpawnSuspectByClick();
     }
 
@@ -210,9 +211,11 @@ public class NPCManager : MonoBehaviour
         if (npc != null && assassinNPCs.Contains(npc))
         {
             assassinNPCs.Remove(npc);
-
-            //Test code
-            GameManager.Instance.EndGame();
+            if (assassinNPCs.Count == 0)
+            {
+                Debug.Log("[System] All Assassin NPCs have been removed from the scene.");
+                GameManager.Instance.PlayerWin();
+            }
         }
     }
 

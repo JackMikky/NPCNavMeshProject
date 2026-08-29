@@ -43,4 +43,12 @@ public class VipNPC : NPCBase
         }
         Debug.Log("VIP panicked and stopped speaking!");
     }
+
+    protected override void Die(GameObject attacker)
+    {
+        base.Die(attacker);
+
+        Debug.LogWarning("VIP is dead; mission failed.!");
+        GameManager.Instance.EndGame();
+    }
 }

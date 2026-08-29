@@ -1,6 +1,6 @@
 public static class EquipmentConstants
 {
-    public const string PistolMenuName = "Weapon/Gun/Pistol";
+    public const string GunMenuName = "Weapon/Gun/";
 
-    public const string KnifeMenuName = "Weapon/MeleeWeapon/Knife";
+    public const string MeleeWeaponMenuName = "Weapon/MeleeWeapon/";
 }
