@@ -17,6 +17,7 @@ public class VipNPC : NPCBase
     protected override void OnSetupBehavior()
     {
         SetNavigationMode(useAgent: false);
+        NPCManager.Instance.RegisterVIP(this);
 
         if (anim != null)
         {
@@ -41,5 +42,13 @@ public class VipNPC : NPCBase
             anim.SetBool(IsTalkingHash, false); // stop talking
         }
         Debug.Log("VIP panicked and stopped speaking!");
+    }
+
+    protected override void Die(GameObject attacker)
+    {
+        base.Die(attacker);
+
+        Debug.LogWarning("VIP is dead; mission failed.!");
+        GameManager.Instance.EndGame();
     }
 }

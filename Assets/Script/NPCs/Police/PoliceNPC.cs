@@ -78,6 +78,7 @@ public class PoliceNPC : NPCBase
     {
         SetNavigationMode(useAgent: true);
         ChangeToState(PatrolingState, PoliceState.Staying);
+        NPCManager.Instance.RegisterPolice(this);
     }
 
     public void ChangeToState(IState newState, PoliceState enumState)

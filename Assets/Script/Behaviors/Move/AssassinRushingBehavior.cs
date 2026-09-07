@@ -32,6 +32,14 @@ public class AssassinRushingBehavior : ScriptableMoveBehavior
         if (npc is AssassinNPC assassin)
         {
             float distance = Vector3.Distance(assassin.transform.position, assassin.Target.position);
+            float attackDist = assassin.CurrentEquipment.Equipment != null ? assassin.CurrentEquipment.Equipment.attackDistance : 1.5f;
+
+            if (distance <= attackDist)
+            {
+                assassin.ChangeToState(assassin.AttackState, AssassinState.Attacking);
+                return;
+            }
+
             if (distance > assassin.startRunningDistance)
             {
                 assassin.ChangeToState(assassin.ApproachingState, AssassinState.Approaching);
