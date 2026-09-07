@@ -54,9 +54,9 @@ public class GameManager : MonoBehaviour
         {
             gameStartUI.SetActive(false);
         }
+        onGameStart?.Invoke();
         Time.timeScale = 1f;
         IsGameRunning = true;
-        onGameStart?.Invoke();
     }
 
     public void EndGame()
@@ -66,9 +66,9 @@ public class GameManager : MonoBehaviour
         {
             gameEndUI.SetActive(true);
         }
+        onGameEnd?.Invoke();
         Time.timeScale = 0.25f;
         IsGameRunning = false;
-        onGameEnd?.Invoke();
     }
 
     public void PlayerWin()
