@@ -119,6 +119,7 @@ MonoBehaviour:
   currentEquipment: {fileID: 3636880687436982440}
   previousEnumState: 0
   interactionEndTime: 0
+  preparationBehavior: {fileID: 11400000, guid: b31ed7f03acb4acdb8f665580facf039, type: 2}
   approachingBehavior: {fileID: 11400000, guid: 0a2e8cac4fce48b4ea8b66e4c45f2156, type: 2}
   rushingBehavior: {fileID: 11400000, guid: 0b15b611ec6c73a428836c78a90ee971, type: 2}
   idleBehavior: {fileID: 11400000, guid: 73702d93741041e4c8e142afb90efa2e, type: 2}

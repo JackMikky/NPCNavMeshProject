@@ -23,8 +23,15 @@ public class NPCManager : MonoBehaviour
     [Header("Game Settings")]
     public Transform vipTransform;
 
-    public int npcCount = 30;
-    public float spawnRadius = 8f;
+    [Header("Spawn Settings")]
+    [SerializeField] private VIPSpawnPoint vipSpawnPoint;
+    [SerializeField] private CrowdSpawnPoint crowdSpawnPoint;
+
+    [Header("Audience Gathering Settings")]
+    [SerializeField] private Transform audienceGatheringPoint;
+    [SerializeField, Min(0f)] private float audienceGatheringRadius = 3f;
+
+    public int npcCount = 10;
 
     public bool enableClickToSpawnSuspect = true;
     public bool enableClickToInteractSuspect = true;
@@ -55,7 +62,13 @@ public class NPCManager : MonoBehaviour
 
     private void Start()
     {
-        if (vipTransform == null || citizenPrefab == null || assassinPrefab == null) return;
+        if (vipTransform == null || citizenPrefab == null || crowdSpawnPoint == null) return;
+
+        if (vipSpawnPoint != null)
+        {
+            vipTransform.SetPositionAndRotation(vipSpawnPoint.Position, vipSpawnPoint.Rotation);
+        }
+
         SpawnCrowd();
     }
 
@@ -125,34 +138,28 @@ public class NPCManager : MonoBehaviour
 
     private void SpawnCrowd()
     {
-        int suspectIndex = Random.Range(0, npcCount);
-
         for (int i = 0; i < npcCount; i++)
         {
-            Vector2 randomCircle = Random.insideUnitCircle.normalized * spawnRadius;
-            Vector3 spawnPos = new Vector3(
-                vipTransform.position.x + randomCircle.x + Random.Range(-1f, 1f),
-                vipTransform.position.y,
-                vipTransform.position.z + randomCircle.y + Random.Range(-1f, 1f)
-            );
-
-            bool isSuspect = (i == suspectIndex);
-
-            GameObject targetPrefab = isSuspect ? assassinPrefab : citizenPrefab;
-            GameObject npcGo = Instantiate(targetPrefab, spawnPos, Quaternion.identity);
+            Vector3 spawnPos = crowdSpawnPoint.GetRandomPosition();
+            GameObject npcGo = Instantiate(citizenPrefab, spawnPos, Quaternion.identity);
 
             NPCBase npcScript = npcGo.GetComponent<NPCBase>();
+            if (npcScript != null && audienceGatheringPoint != null)
+            {
+                Vector2 gatheringOffset = Random.insideUnitCircle * audienceGatheringRadius;
+                Vector3 gatheringPosition = audienceGatheringPoint.position
+                    + new Vector3(gatheringOffset.x, 0f, gatheringOffset.y);
+
+                if (NavMesh.SamplePosition(gatheringPosition, out NavMeshHit gatheringHit, maxSampleDistance, NavMesh.AllAreas))
+                {
+                    if (npcScript is CitizenNPC citizen)
+                        citizen.ConfigureAudienceGathering(gatheringHit.position, vipTransform);
+                }
+            }
+
             if (npcScript != null)
             {
                 npcScript.Initialize();
-            }
-
-            if (isSuspect)
-            {
-                cachedSuspect = npcScript;
-                var rend = npcGo.GetComponentInChildren<Renderer>();
-                if (rend != null) rend.material.color = Color.yellow;
-                Debug.Log($"[System Generated] The suspect (using the Assassin Prefab) has blended into the crowd; Index:{i}");
             }
         }
     }
@@ -171,8 +178,10 @@ public class NPCManager : MonoBehaviour
         NPCBase npcScript = npcGo.GetComponent<NPCBase>();
         if (npcScript == null) return;
 
+        if (npcScript is AssassinNPC assassin)
+            assassin.ConfigurePreparation(position, vipTransform);
+
         npcScript.Initialize();
-        npcScript.SetNavMeshTarget(vipTransform);
         cachedSuspect = npcScript;
 
         Debug.Log($"[Manually Generated] New Assassin successfully created, location: {position}");
@@ -195,6 +204,14 @@ public class NPCManager : MonoBehaviour
         if (npc != null && !citizenNPCs.Contains(npc))
         {
             citizenNPCs.Add(npc);
+        }
+    }
+
+    public void UnregisterCitizen(NPCBase npc)
+    {
+        if (npc != null)
+        {
+            citizenNPCs.Remove(npc);
         }
     }
 

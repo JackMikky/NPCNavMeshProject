@@ -5,9 +5,11 @@ public class AssassinNPC : NPCBase
     #region StateMachine
 
     public ThreateningState ThreateningState { get; private set; }
+    public AssassinPreparingState PreparingState { get; private set; }
     public AssassinStayingState StayingState { get; private set; }
     public AssassinApproachingState ApproachingState { get; private set; }
     public AssassinRushingState RushingState { get; private set; }
+    public AssassinAttackState AttackState { get; private set; }
     public AssassinNavLinkState NavLinkState { get; private set; }
     public AssassinInteractedState InteractedState { get; private set; }
 
@@ -23,6 +25,10 @@ public class AssassinNPC : NPCBase
 
     [Header("Behavior Assets")]
     [Header("Movement")]
+    [SerializeField] private ScriptableMoveBehavior preparationBehavior;
+
+    public ScriptableMoveBehavior PreparationBehavior => preparationBehavior;
+
     [SerializeField] private ScriptableMoveBehavior approachingBehavior;
 
     public ScriptableMoveBehavior ApproachingBehavior => approachingBehavior;
@@ -52,6 +58,12 @@ public class AssassinNPC : NPCBase
     public ScriptableNavLinkBehavior NavLinkingBehavior => navLinkingBehavior;
 
     [HideInInspector] public float nextPathUpdateTime;
+    [HideInInspector] public bool reachedPreparationPoint;
+    [HideInInspector] public float preparationEndTime;
+
+    private Vector3 preparationPoint;
+
+    public bool HasPreparationPoint { get; private set; }
 
     #endregion Behavior Settings
 
@@ -67,6 +79,11 @@ public class AssassinNPC : NPCBase
     [Tooltip("How long to idle after the threatening animation finishes")]
     [SerializeField] private float stayDuration = 2.5f;
 
+    [Header("Character Parameters")]
+    [SerializeField, Range(0.0f, 1.0f)] private float courage;
+
+    public float Courage => courage;
+
     #region Animation hash cache
 
     public static int ThreateningTrigger => AnimationConstants.Threatening;
@@ -81,12 +98,15 @@ public class AssassinNPC : NPCBase
     {
         base.Awake();
         this.npcType = NPCType.Assassin;
+        courage = Random.Range(0.0f, 1.0f);
 
         // Initialize the state machine and the various state classes
         ThreateningState = new ThreateningState(this);
+        PreparingState = new AssassinPreparingState(this);
         StayingState = new AssassinStayingState(this, this.stayDuration);
         ApproachingState = new AssassinApproachingState(this);
         RushingState = new AssassinRushingState(this);
+        AttackState = new AssassinAttackState(this);
         NavLinkState = new AssassinNavLinkState(this);
         InteractedState = new AssassinInteractedState(this);
         AttackState = new AssassinAttackState(this);
@@ -100,7 +120,10 @@ public class AssassinNPC : NPCBase
 
         if (agent != null) agent.autoTraverseOffMeshLink = false;
 
-        ChangeToState(ThreateningState, AssassinState.Threatening);
+        if (HasPreparationPoint)
+            ChangeToState(PreparingState, AssassinState.Preparing);
+        else
+            ChangeToState(ThreateningState, AssassinState.Threatening);
     }
 
     protected override void OnUpdate()
@@ -124,6 +147,21 @@ public class AssassinNPC : NPCBase
     }
 
     #region Helpers exposed for states
+
+    public void ConfigurePreparation(Vector3 position, Transform vipTarget)
+    {
+        preparationPoint = position;
+        HasPreparationPoint = true;
+        SetNavMeshTarget(vipTarget);
+    }
+
+    public void SetDestinationToPreparationPoint()
+    {
+        if (agent != null && agent.enabled && agent.isOnNavMesh)
+        {
+            agent.SetDestination(preparationPoint);
+        }
+    }
 
     public void TargetDistanceCheckAndTransition()
     {

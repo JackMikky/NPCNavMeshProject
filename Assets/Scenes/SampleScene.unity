@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
   m_SerializedVersion: 0
   m_OverrideArea: 1
@@ -21117,9 +21117,55 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1668544141}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1668544140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668544141}
+  - component: {fileID: 1668544142}
+  m_Layer: 0
+  m_Name: Audience Gathering Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1668544141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668544140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1668544138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668544142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668544140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98a53292ea24d16bd1330444bef362f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::CrowdSpawnPoint
+  radius: 3
 --- !u!114 &1668544139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21135,8 +21181,11 @@ MonoBehaviour:
   citizenPrefab: {fileID: 7091489066321530029, guid: 7faf9c05d9cbc96419c4ceb24c5b129c, type: 3}
   assassinPrefab: {fileID: 7091489066321530029, guid: cebd8654d57774048b0172fc9df02581, type: 3}
   vipTransform: {fileID: 4111821227440638}
-  npcCount: 0
-  spawnRadius: 12
+  vipSpawnPoint: {fileID: 0}
+  crowdSpawnPoint: {fileID: 1668544142}
+  audienceGatheringPoint: {fileID: 1668544141}
+  audienceGatheringRadius: 3
+  npcCount: 10
   enableClickToSpawnSuspect: 1
   enableClickToInteractSuspect: 1
   groundLayers:

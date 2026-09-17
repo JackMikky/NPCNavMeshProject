@@ -14,6 +14,7 @@ public enum AssassinState
     Rushing,
     NavLinking,
     Interacted,
+    Preparing,
     Attacking
 }
 

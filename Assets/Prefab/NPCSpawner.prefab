@@ -46,11 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCSpawner
   rangeType: 1
   radius: 5
-  npc: []
-  spawnWhat: 0
-  spawnType: 0
-  randomin: 0
-  randommax: 0
-  spawnTime: 0
-  spawnCount: 0
-  spawnNum: 0
+  citizenPrefab: {fileID: 7091489066321530029, guid: 7faf9c05d9cbc96419c4ceb24c5b129c, type: 3}
+  assassinPrefab: {fileID: 7091489066321530029, guid: cebd8654d57774048b0172fc9df02581, type: 3}
+  gatheringPoint: {fileID: 0}
+  gatheringRadius: 3
+  vipTarget: {fileID: 0}
+  exitPoint: {fileID: 0}
+  maxSampleDistance: 1.5
+  minSpawnInterval: 5
+  maxSpawnInterval: 10
+  maxNpcCount: 30
+  assassinSpawnPercentage: 10
