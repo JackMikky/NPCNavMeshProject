@@ -13,7 +13,6 @@ public class AssassinNPC : NPCBase
     public AssassinNavLinkState NavLinkState { get; private set; }
     public AssassinInteractedState InteractedState { get; private set; }
 
-    public AssassinAttackState AttackState { get; private set; }
 
     [HideInInspector] public IState previousState;
     [HideInInspector] public AssassinState previousEnumState;
