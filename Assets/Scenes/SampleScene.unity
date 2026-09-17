@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
   m_SerializedVersion: 0
   m_OverrideArea: 1
@@ -5654,7 +5654,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1632548032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &476018738
@@ -20502,6 +20503,63 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 35.460045, y: 11.730206, z: 44.755478}
   m_Center: {x: -0.3217516, y: 5.823163, z: -0.0017976761}
+--- !u!1 &1632548031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1632548032}
+  - component: {fileID: 1632548033}
+  m_Layer: 0
+  m_Name: NPCSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1632548032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632548031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 473513711}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1632548033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632548031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3563a8c12a4340d4e9461bda164cfe45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCSpawner
+  rangeType: 0
+  radius: 3
+  citizenPrefab: {fileID: 7091489066321530029, guid: 65b0e1947500efd4990e77add5a17c12, type: 3}
+  assassinPrefab: {fileID: 7091489066321530029, guid: cebd8654d57774048b0172fc9df02581, type: 3}
+  gatheringPoint: {x: 0, y: 0, z: 0}
+  gatheringRadius: 3
+  vipTarget: {fileID: 4111821227440638}
+  exitPoint: {x: 0, y: 0, z: 0}
+  maxSampleDistance: 1.5
+  minSpawnInterval: 5
+  maxSpawnInterval: 10
+  maxNpcCount: 30
+  assassinSpawnPercentage: 30
 --- !u!1001 &1637228423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21121,6 +21179,36 @@ Transform:
   - {fileID: 1668544141}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1668544139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668544137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bc6b8b80b37e048916d10229cf30b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  citizenPrefab: {fileID: 7091489066321530029, guid: 7faf9c05d9cbc96419c4ceb24c5b129c, type: 3}
+  assassinPrefab: {fileID: 7091489066321530029, guid: cebd8654d57774048b0172fc9df02581, type: 3}
+  vipTransform: {fileID: 4111821227440638}
+  vipSpawnPoint: {fileID: 0}
+  crowdSpawnPoint: {fileID: 1668544142}
+  audienceGatheringPoint: {fileID: 1668544141}
+  audienceGatheringRadius: 3
+  npcCount: 10
+  enableClickToSpawnSuspect: 1
+  enableClickToInteractSuspect: 1
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  maxSampleDistance: 1.5
+  citizenNPCs: []
+  assassinNPCs: []
+  policeNPCs: []
+  vipNPCs: []
 --- !u!1 &1668544140
 GameObject:
   m_ObjectHideFlags: 0
@@ -21163,39 +21251,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d98a53292ea24d16bd1330444bef362f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrowdSpawnPoint
   radius: 3
---- !u!114 &1668544139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668544137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30bc6b8b80b37e048916d10229cf30b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  citizenPrefab: {fileID: 7091489066321530029, guid: 7faf9c05d9cbc96419c4ceb24c5b129c, type: 3}
-  assassinPrefab: {fileID: 7091489066321530029, guid: cebd8654d57774048b0172fc9df02581, type: 3}
-  vipTransform: {fileID: 4111821227440638}
-  vipSpawnPoint: {fileID: 0}
-  crowdSpawnPoint: {fileID: 1668544142}
-  audienceGatheringPoint: {fileID: 1668544141}
-  audienceGatheringRadius: 3
-  npcCount: 10
-  enableClickToSpawnSuspect: 1
-  enableClickToInteractSuspect: 1
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxSampleDistance: 1.5
-  citizenNPCs: []
-  assassinNPCs: []
-  policeNPCs: []
-  vipNPCs: []
 --- !u!1001 &1668748698
 PrefabInstance:
   m_ObjectHideFlags: 0
