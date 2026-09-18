@@ -63,6 +63,7 @@ public class AssassinNPC : NPCBase
     private Vector3 preparationPoint;
 
     public bool HasPreparationPoint { get; private set; }
+    public Vector3 PreparationPoint => preparationPoint;
 
     #endregion Behavior Settings
 

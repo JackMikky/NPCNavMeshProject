@@ -60,8 +60,14 @@ public class AssassinPreparationBehavior : ScriptableMoveBehavior
     {
         if (assassin.Agent == null || !assassin.Agent.enabled || !assassin.Agent.isOnNavMesh) return;
 
-        if (!assassin.Agent.pathPending
-            && assassin.Agent.remainingDistance <= assassin.Agent.stoppingDistance)
+        Vector3 preparationOffset = assassin.PreparationPoint - assassin.transform.position;
+        preparationOffset.y = 0f;
+        bool isAlreadyAtPreparationPoint = preparationOffset.sqrMagnitude
+            <= assassin.Agent.stoppingDistance * assassin.Agent.stoppingDistance;
+
+        if (isAlreadyAtPreparationPoint
+            || (!assassin.Agent.pathPending
+                && assassin.Agent.remainingDistance <= assassin.Agent.stoppingDistance))
         {
             assassin.reachedPreparationPoint = true;
             float hesitationDuration = Mathf.Lerp(
