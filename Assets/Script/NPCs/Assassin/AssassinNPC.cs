@@ -10,6 +10,7 @@ public class AssassinNPC : NPCBase
     public AssassinApproachingState ApproachingState { get; private set; }
     public AssassinRushingState RushingState { get; private set; }
     public AssassinAttackState AttackState { get; private set; }
+    public AssassinWeaponPickupState WeaponPickupState { get; private set; }
     public AssassinNavLinkState NavLinkState { get; private set; }
     public AssassinInteractedState InteractedState { get; private set; }
 
@@ -84,6 +85,15 @@ public class AssassinNPC : NPCBase
 
     public float Courage => courage;
 
+    [Header("Weapon Pickup")]
+    [SerializeField] private Transform weaponHoldPoint;
+    [SerializeField, Min(0.1f)] private float weaponPickupDistance = 1.25f;
+    [SerializeField, Min(0.05f)] private float weaponSearchInterval = 0.5f;
+
+    public Transform WeaponHoldPoint => weaponHoldPoint;
+    public float WeaponPickupDistance => weaponPickupDistance;
+    public float WeaponSearchInterval => weaponSearchInterval;
+
     #region Animation hash cache
 
     public static int ThreateningTrigger => AnimationConstants.Threatening;
@@ -109,6 +119,7 @@ public class AssassinNPC : NPCBase
         AttackState = new AssassinAttackState(this);
         NavLinkState = new AssassinNavLinkState(this);
         InteractedState = new AssassinInteractedState(this);
+        WeaponPickupState = new AssassinWeaponPickupState(this);
         AttackState = new AssassinAttackState(this);
     }
 
@@ -119,7 +130,52 @@ public class AssassinNPC : NPCBase
         NPCManager.Instance.RegisterAssassin(this);
 
         if (agent != null) agent.autoTraverseOffMeshLink = false;
+        UpdateWeaponAttackDistance();
 
+        if (currentEquipment == null && WeaponManager.Instance != null && weaponHoldPoint != null)
+        {
+            ChangeToState(WeaponPickupState, AssassinState.SeekingWeapon);
+            return;
+        }
+
+        if (currentEquipment == null && WeaponManager.Instance != null)
+        {
+            Debug.LogWarning($"[{name}] Weapon hold point is not assigned; skipping weapon pickup.", this);
+        }
+
+        if (HasPreparationPoint)
+            ChangeToState(PreparingState, AssassinState.Preparing);
+        else
+            ChangeToState(ThreateningState, AssassinState.Threatening);
+    }
+
+    public bool TryEquipWeapon(WeaponObject weapon)
+    {
+        if (currentEquipment != null || weapon == null || weaponHoldPoint == null)
+        {
+            return false;
+        }
+
+        if (!weapon.PickUp(weaponHoldPoint))
+        {
+            return false;
+        }
+
+        currentEquipment = weapon;
+        UpdateWeaponAttackDistance();
+        return true;
+    }
+
+    private void UpdateWeaponAttackDistance()
+    {
+        if (agent != null && currentEquipment != null && currentEquipment.Equipment != null)
+        {
+            agent.stoppingDistance = Mathf.Max(0f, currentEquipment.Equipment.attackDistance);
+        }
+    }
+
+    public void ResumeAfterWeaponPickup()
+    {
         if (HasPreparationPoint)
             ChangeToState(PreparingState, AssassinState.Preparing);
         else

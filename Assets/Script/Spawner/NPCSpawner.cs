@@ -17,10 +17,12 @@ public class NPCSpawner : MonoBehaviour
 
     [Header("NPC Prefabs")]
     [SerializeField] private GameObject citizenPrefab;
+
     [SerializeField] private GameObject assassinPrefab;
 
     [Header("Target Settings")]
     [SerializeField] private Vector3 gatheringPoint;
+
     [SerializeField, Min(0f)] private float gatheringRadius = 3f;
     [SerializeField] private Transform vipTarget;
     [SerializeField] private Vector3 exitPoint;
@@ -28,6 +30,7 @@ public class NPCSpawner : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField, Min(0.1f)] private float minSpawnInterval = 5f;
+
     [SerializeField, Min(0.1f)] private float maxSpawnInterval = 10f;
     [SerializeField, Min(1)] private int maxNpcCount = 30;
     [SerializeField, Range(0f, 100f)] private float assassinSpawnPercentage = 10f;
