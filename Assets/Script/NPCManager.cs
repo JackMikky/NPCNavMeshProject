@@ -25,10 +25,12 @@ public class NPCManager : MonoBehaviour
 
     [Header("Spawn Settings")]
     [SerializeField] private VIPSpawnPoint vipSpawnPoint;
+
     [SerializeField] private CrowdSpawnPoint crowdSpawnPoint;
 
     [Header("Audience Gathering Settings")]
     [SerializeField] private Transform audienceGatheringPoint;
+
     [SerializeField, Min(0f)] private float audienceGatheringRadius = 3f;
 
     public int npcCount = 10;
@@ -68,8 +70,6 @@ public class NPCManager : MonoBehaviour
         {
             vipTransform.SetPositionAndRotation(vipSpawnPoint.Position, vipSpawnPoint.Rotation);
         }
-
-        SpawnCrowd();
     }
 
     private void Update()
